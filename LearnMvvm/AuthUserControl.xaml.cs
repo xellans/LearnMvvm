@@ -20,12 +20,9 @@ namespace LearnMvvm
     /// </summary>
     public partial class AuthUserControl : UserControl
     {
-        AuthVM authVM; 
-        public AuthUserControl(AuthVM authVM)
+        public AuthUserControl()
         {
             InitializeComponent();
-            this.authVM = authVM;
-            DataContext = authVM;
         }
     }
 }

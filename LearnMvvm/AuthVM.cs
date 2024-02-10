@@ -14,6 +14,7 @@ namespace LearnMvvm
 {
     public class AuthVM : IUser
     {
+        public static AuthVM Instance { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public void OnPropertyChanged(string propertyName)
@@ -24,6 +25,7 @@ namespace LearnMvvm
 
         public AuthVM()
         {
+            Instance = this;
             AddUserCommand = new RelayCommand(AuthUser);
             CommandUser = new CommandUser();
             User = CommandUser.GetUser();
@@ -34,7 +36,7 @@ namespace LearnMvvm
                 AuthUserControlView = null!;
             }
             else
-                AuthUserControlView = new AuthUserControl(this);
+                AuthUserControlView = new AuthUserControl();
         }
         private User? _user;
         public User? User 
