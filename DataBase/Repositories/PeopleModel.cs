@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataBase.Repositories
 {
-    public class PeopleModel : IPeopleModel
+    public partial class PeopleModel : IPeopleModel
     {
         internal readonly UsersPeopleDb db;
         internal readonly string dataBaseNamePath;
@@ -22,6 +22,8 @@ namespace DataBase.Repositories
             PeopleRepository = new PeopleRepository(db, dataBaseNamePath);
             db.Users.Load();
             db.People.Load();
+
+            IsAuthorized = db.Users.Any();
         }
 
         public IUsersRepository UsersRepository { get; }

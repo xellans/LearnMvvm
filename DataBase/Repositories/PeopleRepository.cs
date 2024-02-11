@@ -87,7 +87,7 @@ namespace DataBase.Repositories
             return t;
         }
 
-        public bool Delete(int id)
+        public bool Delete(long id)
         {
             if (id == 0)
                 throw new NotImplementedException();
