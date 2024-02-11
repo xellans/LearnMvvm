@@ -7,20 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Command\**" />
-    <Compile Remove="Entity\**" />
-    <EmbeddedResource Remove="Command\**" />
-    <EmbeddedResource Remove="Entity\**" />
-    <None Remove="Command\**" />
-    <None Remove="Entity\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CommonNet6\CommonNet6.csproj" />
+    <ProjectReference Include="..\InterfaceList\InterfaceList.csproj" />
   </ItemGroup>
 
 </Project>

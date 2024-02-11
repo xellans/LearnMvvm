@@ -1,43 +1,36 @@
-﻿//CommandUser commandUser = new CommandUser();
-//CommandPeople commandPeople = new CommandPeople();
+﻿using DataBase;
+using DataBase.Command;
+using DataBase.Entity;
 
-using DataBase.Repositories;
-using Entity;
-using Interfaces;
-
-string pathDb = "LearnMvvm\\DataFolder";
-string nameDb = "People.db";
-string userFolders = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-string fullNameDb = Path.Combine(userFolders, pathDb, nameDb);
-
-IPeopleModel model = new PeopleModel(fullNameDb);
+CommandUser commandUser = new CommandUser();
+CommandPeople commandPeople = new CommandPeople();
 
 string info = @"1 - Добавить нового пользователя
 2 - Проверить есть ли пользователь в бд
-3 - Сгенирировать в базу данных людей - это встроенно в Code First
+3 - Сгенирировать в базу данных людей
 4- Вывести список людей";
 Console.WriteLine(info);
 
-switch (Console.ReadLine())
-{
-    case "1":
+    switch (Console.ReadLine())
+    {
+        case "1":
         Console.WriteLine("Введите имя пользователя для добавления в бд");
         AddUser();
         break;
-    case "2":
+        case "2":
         Console.WriteLine("Введите имя пользователя для проверки");
         ExistUser();
         break;
-    //case "3":
-    //    commandPeople.CreatePeople();
-    //    Console.WriteLine("Люди были добавлены в базу");
-    //    break;
+    case "3":
+        commandPeople.CreatePeople();
+        Console.WriteLine("Люди были добавлены в базу");
+        break;
     case "4":
-        //var array = commandPeople.OutputPeople();
+        var  array = commandPeople.OutputPeople();
         // Выводим весь список людей
-        foreach (var person in model.PeopleRepository.GetCollection())
+        foreach (var person in array)
         {
-            Console.WriteLine($"Id: {person.Id}, Name: {person.Name}, Age: {person.Age}");
+            Console.WriteLine($"Id: {person.Id}, Name: {person.Name}, CompletedTasks: {person.CompletedTasks}, RemainsExecute: {person.RemainsExecute}");
         }
         break;
 }
@@ -47,12 +40,12 @@ Console.WriteLine("Работа окончена");
 //Добавить нового пользователя в бд
 void AddUser()
 {
-    string text = Console.ReadLine() ?? string.Empty;
+    string text = Console.ReadLine();
     if (text != null && text != "")
     {
         User user = new User();
         user.Name = text;
-        model.UsersRepository.Add(user);
+        commandUser.AddUser(user);
         Console.WriteLine($"Пользователь {text} был добавлен");
     }
     else
@@ -61,12 +54,14 @@ void AddUser()
 ///Проверить если пользователь в бд
 void ExistUser()
 {
-    string text = Console.ReadLine() ?? string.Empty    ;
+    string text = Console.ReadLine();
     if (text != null && text != "")
     {
-        var exist = model.UsersRepository.IsExistName(text);
-        if (exist)
-            Console.WriteLine($"Пользователь {text} есть в бд");
+        var user = new User();
+        user.Name = text;
+        var exist = commandUser.IsExistUser(user);
+        if(exist)
+        Console.WriteLine($"Пользователь {text} есть в бд");
         else
             Console.WriteLine($"Пользователя {text} нет в бд");
     }

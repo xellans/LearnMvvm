@@ -4,12 +4,45 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LearnMvvm"
+        xmlns:userControls="clr-namespace:LearnMvvm.UserControls"
+        xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Style="{StaticResource CustomWindowStyle}"
+        Height="450" Width="800">
     <Window.DataContext>
-        <local:AuthVM/>
+        <vm:NavigationVM/>
     </Window.DataContext>
-    <Grid>
-        <ContentControl Content="{Binding AuthUserControlView}"></ContentControl>
-    </Grid>
+    <Border>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="230"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <!--Окно регистрации-->
+            <ContentControl d:Visibility="Collapsed" Content="{Binding AppearingUserControl}" Panel.ZIndex="1" Grid.RowSpan="100" Grid.ColumnSpan="100"></ContentControl>
+            <!--Отступ сверху -35 для того чтобы сравнять лого с размером размера заголовка окна-->
+            <Border Grid.Row="0" BorderBrush="#0D1D37" BorderThickness="0 0 1 0" Margin=" 0 -35 0 0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock FontSize="28" FontFamily="Yu Gothic" Foreground="#6880AA" Margin="10 0 0 0" FontStyle="Italic">Exemple project</TextBlock>
+                    <StackPanel Grid.Row="1">
+                        <RadioButton Command="{Binding PeopleVMCommand}">Статистика заданий</RadioButton>
+                        <RadioButton Command="{Binding ProductVMCommand}">Список товаров</RadioButton>
+                        <RadioButton>Главная</RadioButton>
+                        <RadioButton>Главная</RadioButton>
+                        <RadioButton>Главная</RadioButton>
+                        <RadioButton>Главная</RadioButton>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Grid Grid.Column="1">
+                <ContentControl Content="{Binding CurrentMenu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ContentControl>
+            </Grid>
+        </Grid>
+    </Border>
 </Window>

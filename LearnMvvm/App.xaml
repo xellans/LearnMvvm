@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:LearnMvvm"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/CustomWindow.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/RadioButtonStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/DataGridStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="DataTemplates.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
