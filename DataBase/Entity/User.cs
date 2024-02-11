@@ -1,16 +1,20 @@
+п»їusing Common;
+
 namespace DataBase.Entity
 {
-    public class User
+    internal class User : UserBase, IUser
     {
-        public long Id { get; set; }
+        public long Id { get => _id; set => _id = value; }
+
         /// <summary>
-        /// Имя пользователя
+        /// РРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        public string Name { get => _name; set => _name = value; }
+
         /// <summary>
-        /// Возвращает true если пользователь авторизирован
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ true РµСЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ Р°РІС‚РѕСЂРёР·РёСЂРѕРІР°РЅ
         /// </summary>
-        public bool IsAuthorized { get; set; }
+        public bool IsAuthorized { get => _isAuthorized; set => _isAuthorized = value; }
     }
 
 }

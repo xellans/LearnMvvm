@@ -11,13 +11,13 @@ namespace DataBase.Command
     {
         public CommandPeople()
         {
-            using ApplicationContext db = new ApplicationContext();
+            using UsersPeopleDb db = new ApplicationContext();
             db.Database.EnsureCreated();
         }
         public void CreatePeople()
         {
             string[] peopleArray = { "Алиса", "Екатерина", "Василий", "Андрей", "Пётр", "Инна", "Вика", "Жанна", "Ксюша", "Анатолий" };
-            using ApplicationContext db = new ApplicationContext();
+            using UsersPeopleDb db = new ApplicationContext();
             for (int i = 0; i < 10; i++)
             {
                 People people = new People()
@@ -32,7 +32,7 @@ namespace DataBase.Command
 
         public List<People> OutputPeople()
         {
-            using ApplicationContext db = new ApplicationContext();
+            using UsersPeopleDb db = new ApplicationContext();
             return db.People.ToList();
         }
     }

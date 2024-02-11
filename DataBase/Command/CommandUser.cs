@@ -11,7 +11,7 @@ namespace DataBase.Command
     {
         public CommandUser()
         {
-            using ApplicationContext db = new ApplicationContext();
+            using UsersPeopleDb db = new ApplicationContext();
             db.Database.EnsureCreated();
         }
 
@@ -25,7 +25,7 @@ namespace DataBase.Command
                 return;
             using (var db = new ApplicationContext())
             {
-                db.User.Add(user);
+                db.Users.Add(user);
                     db.SaveChanges();
             }
         }
@@ -35,7 +35,7 @@ namespace DataBase.Command
             User? user = null;
             using (var db = new ApplicationContext())
             {
-                user = db.User.FirstOrDefault();
+                user = db.Users.FirstOrDefault();
             }
             return user;
         }
@@ -50,7 +50,7 @@ namespace DataBase.Command
             bool _IsExistUser = false;
             using (var db = new ApplicationContext())
             {
-                _IsExistUser = db.User.Any(x => x.Name == Name);
+                _IsExistUser = db.Users.Any(x => x.Name == Name);
             }
             return _IsExistUser;
         }
@@ -65,7 +65,7 @@ namespace DataBase.Command
             bool IsAuth = false;
             using (var db = new ApplicationContext())
             {
-                var _user = db.User.FirstOrDefault(x => x.Name == user.Name);
+                var _user = db.Users.FirstOrDefault(x => x.Name == user.Name);
                 if (_user != null)
                     IsAuth = _user.IsAuthorized;
             }
