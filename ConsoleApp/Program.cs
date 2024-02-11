@@ -3,13 +3,14 @@
 
 using DataBase.Repositories;
 using Entity;
+using Interfaces;
 
 string pathDb = "LearnMvvm\\DataFolder";
 string nameDb = "People.db";
 string userFolders = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 string fullNameDb = Path.Combine(userFolders, pathDb, nameDb);
 
-PeopleModel model = new PeopleModel(fullNameDb);
+IPeopleModel model = new PeopleModel(fullNameDb);
 
 string info = @"1 - Добавить нового пользователя
 2 - Проверить есть ли пользователь в бд
