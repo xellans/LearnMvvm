@@ -12,7 +12,7 @@ using ViewModel.VmHellper;
 
 namespace LearnMvvm
 {
-    public class AuthVM : IUser
+    public class  AuthVM : IUser
     {
         public static AuthVM Instance { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -31,7 +31,7 @@ namespace LearnMvvm
             User = CommandUser.GetUser();
             if (User == null)
                 User = new();
-            if( User.IsAuthorized)
+            if(User.IsAuthorized)
             {
                 AuthUserControlView = null!;
             }
@@ -39,9 +39,9 @@ namespace LearnMvvm
                 AuthUserControlView = new AuthUserControl();
         }
         private User? _user;
-        public User? User 
+        public User? User
         { 
-            get => _user ?? new User();
+            get => _user;
             set 
             {
                 _user = value;
@@ -53,7 +53,9 @@ namespace LearnMvvm
         public void AuthUser(object obj)
         {
             User.IsAuthorized = true; //Не изменяется на true
+            if(!CommandUser.IsExistUser(User))
             CommandUser.AddUser(User);
+            AuthUserControlView = null!;
         }
 
         private AuthUserControl _authUserControl;

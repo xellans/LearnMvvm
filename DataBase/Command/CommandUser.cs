@@ -21,8 +21,10 @@ namespace DataBase.Command
         /// <param name="user"></param>
         public void AddUser(User user)
         {
-            if (IsExistUser(user.Name))
-                return;
+            if (IsExistUser(user))
+            {
+                throw new Exception("Пользователь уже есть в базе данных");
+            }
             using (var db = new ApplicationContext())
             {
                 db.User.Add(user);
@@ -45,12 +47,12 @@ namespace DataBase.Command
         /// </summary>
         /// <param name="Name"></param>
         /// <returns></returns>
-        public bool IsExistUser(string Name)
+        public bool IsExistUser(User user)
         {
             bool _IsExistUser = false;
             using (var db = new ApplicationContext())
             {
-                _IsExistUser = db.User.Any(x => x.Name == Name);
+                _IsExistUser = db.User.Any(x => x == user);
             }
             return _IsExistUser;
         }

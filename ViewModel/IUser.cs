@@ -13,7 +13,7 @@ namespace ViewModel
 {
     public interface IUser: INotifyPropertyChanged
     {
-        public User? User { get; set; }
+        public User? User {  get; set; }
       //  public ICommand AddUserCommand { get; set; }
     }
 }

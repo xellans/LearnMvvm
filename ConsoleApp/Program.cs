@@ -57,7 +57,9 @@ void ExistUser()
     string text = Console.ReadLine();
     if (text != null && text != "")
     {
-        var exist = commandUser.IsExistUser(text);
+        var user = new User();
+        user.Name = text;
+        var exist = commandUser.IsExistUser(user);
         if(exist)
         Console.WriteLine($"Пользователь {text} есть в бд");
         else
