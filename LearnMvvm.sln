@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearnMvvm", "LearnMvvm\Lear
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModel", "ViewModel\ViewModel.csproj", "{0A1F48EF-58FE-4BD5-BBA7-45CAD5955765}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{78D08194-43D8-406E-9B88-A51764B95DC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{78D08194-43D8-406E-9B88-A51764B95DC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "DataBase\DataBase.csproj", "{40AFD79F-C940-4A33-AE2B-96B1D58DDE1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBase", "DataBase\DataBase.csproj", "{40AFD79F-C940-4A33-AE2B-96B1D58DDE1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceList", "InterfaceList\InterfaceList.csproj", "{00502EB2-1843-4F5B-94D1-A0A588BDD60A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{40AFD79F-C940-4A33-AE2B-96B1D58DDE1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40AFD79F-C940-4A33-AE2B-96B1D58DDE1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40AFD79F-C940-4A33-AE2B-96B1D58DDE1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00502EB2-1843-4F5B-94D1-A0A588BDD60A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00502EB2-1843-4F5B-94D1-A0A588BDD60A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00502EB2-1843-4F5B-94D1-A0A588BDD60A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00502EB2-1843-4F5B-94D1-A0A588BDD60A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

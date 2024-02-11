@@ -6,11 +6,13 @@
              xmlns:local="clr-namespace:LearnMvvm"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             DataContext="{Binding Source={x:Static local:AuthVM.Instance}}">
-    <Grid>
-        <Border Background="Black" Opacity="0.3"/>
+             xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
+             DataContext="{Binding Source={x:Static vm:AuthVM.Instance}}">
+    <Grid Margin="0 10 0 0">
+        <Border Background="Black" Opacity="0.4"/>
         <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -27,8 +29,9 @@
             <TextBlock Margin="10 10 0 0" FontSize="16">Окно авторизации</TextBlock>
             <Rectangle Grid.Row="1" Margin="0 5 0 0" Stroke="#DDDDDD" StrokeThickness="1"></Rectangle>
             <TextBlock Grid.Row="2" FontSize="13" Margin="14 5 0 0">Имя пользователя</TextBlock>
-            <TextBox Grid.Row="3" Height="32" Text="{Binding User.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="#DDDDDD" BorderThickness="1" Margin="14 5 14 0"></TextBox>
-            <Button Grid.Row="4" Height="32" Command="{Binding AddUserCommand}" BorderBrush="#DDDDDD" BorderThickness="1" Margin="14 8 14 0">Авторизоваться</Button>
+            <TextBox x:Name="Name" Grid.Row="3" Height="32" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="#DDDDDD" BorderThickness="1" Margin="14 5 14 0"></TextBox>
+            <TextBox Grid.Row="4" Height="32" Text="{Binding Text, ElementName=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="#DDDDDD" BorderThickness="1" Margin="14 5 14 0"></TextBox>
+            <Button Grid.Row="5" Height="32" Command="{Binding AddUserCommand}" BorderBrush="#DDDDDD" BorderThickness="1" Margin="14 8 14 0">Авторизоваться</Button>
         </Grid>
     </Grid>
 </UserControl>

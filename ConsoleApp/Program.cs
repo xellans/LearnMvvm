@@ -30,7 +30,7 @@ Console.WriteLine(info);
         // Выводим весь список людей
         foreach (var person in array)
         {
-            Console.WriteLine($"Id: {person.Id}, Name: {person.Name}, Age: {person.Age}");
+            Console.WriteLine($"Id: {person.Id}, Name: {person.Name}, CompletedTasks: {person.CompletedTasks}, RemainsExecute: {person.RemainsExecute}");
         }
         break;
 }

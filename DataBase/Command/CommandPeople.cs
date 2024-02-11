@@ -18,12 +18,13 @@ namespace DataBase.Command
         {
             string[] peopleArray = { "Алиса", "Екатерина", "Василий", "Андрей", "Пётр", "Инна", "Вика", "Жанна", "Ксюша", "Анатолий" };
             using ApplicationContext db = new ApplicationContext();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 200; i++)
             {
                 People people = new People()
                 {
-                    Name = peopleArray[i],
-                    Age = Random.Shared.Next(18, 26),
+                    Name = peopleArray[Random.Shared.Next(0, 9)],
+                    CompletedTasks = Random.Shared.Next(10, 1000),
+                    RemainsExecute = Random.Shared.Next(10, 1000)
                 };
                 db.People.Add(people);
             }

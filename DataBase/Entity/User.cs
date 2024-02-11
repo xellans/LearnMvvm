@@ -1,6 +1,9 @@
+using InterfaceList;
+using System.Collections.Generic;
+
 namespace DataBase.Entity
 {
-    public class User
+    public class User: IUser
     {
         public long Id { get; set; }
         /// <summary>
