@@ -4,7 +4,7 @@
 using DataBase.Repositories;
 using Entity;
 
-string pathDb = "DataFolder";
+string pathDb = "LearnMvvm\\DataFolder";
 string nameDb = "People.db";
 string userFolders = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 string fullNameDb = Path.Combine(userFolders, pathDb, nameDb);
