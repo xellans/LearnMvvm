@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBase", "DataBase\DataBa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceList", "InterfaceList\InterfaceList.csproj", "{00502EB2-1843-4F5B-94D1-A0A588BDD60A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{13E9BB86-17F5-4AB9-8C52-D3278F16E4EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{00502EB2-1843-4F5B-94D1-A0A588BDD60A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00502EB2-1843-4F5B-94D1-A0A588BDD60A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00502EB2-1843-4F5B-94D1-A0A588BDD60A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13E9BB86-17F5-4AB9-8C52-D3278F16E4EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13E9BB86-17F5-4AB9-8C52-D3278F16E4EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13E9BB86-17F5-4AB9-8C52-D3278F16E4EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13E9BB86-17F5-4AB9-8C52-D3278F16E4EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
