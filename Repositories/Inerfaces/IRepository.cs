@@ -13,7 +13,7 @@ namespace Repositories.Inerfaces
         ReadOnlyObservableCollection<People> GetPeopleCollection();
         ReadOnlyObservableCollection<Product> GetProductCollection();
 
-        bool IsExist(T? t);
+        bool Any<T>(Func<T, bool> predicate) where T : class;
         T? Remove(T t);
         T? Clone(T t);
         T? Add(T t);

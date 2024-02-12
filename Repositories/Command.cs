@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Repositories.Inerfaces;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq.Expressions;
 using System.Xml.Linq;
 
 namespace Repositories
@@ -39,21 +40,27 @@ namespace Repositories
         /// <param name="t"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public bool IsExist(T? t)
-        {
-            bool result = false;
-            if (t == null)
-                throw new ArgumentNullException($"{t?.GetType().Name}, значение объекта равно null");
-            if (t is User user)
-                result = Context.User.Any(x => x.Name == user.Name);
+        public bool Any<T>(Func<T, bool> predicate) where T : class =>  Context.Set<T>().Any(predicate);
+        /// <summary>
+        /// Проецирует последовательность
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public IEnumerable<T> Where<T>(Func<T, bool> predicate) where T : class => Context.Set<T>().Where(predicate);
+        /// <summary>
+        /// Возвращает первый найденный элемент
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public T? FirstOrDefault<T>(Func<T, bool> predicate) where T : class => Context.Set<T>().FirstOrDefault(predicate);
 
-            if (t is People people)
-                result = Context.People.Any(x => x.Name == people.Name);
+       /// <summary>
+       /// Сохранить изменения
+       /// </summary>
+        public void SaveChanges() => Context.SaveChanges();
 
-            if (t is Product product)
-                result = Context.Product.Any(x => x.Name == product.Name);
-            return result;
-        }
 
         /// <summary>
         /// Добавить новый элемент в бд

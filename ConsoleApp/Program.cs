@@ -2,6 +2,7 @@
 using Repositories;
 
 Command<User> user = new Command<User>();
+
 Command<People> people = new Command<People>();
 
 string info = @"1 - Добавить нового пользователя
@@ -44,7 +45,7 @@ void AddUser()
     {
         User _user = new User();
         _user.Name = text;
-        user.IsExist(_user);
+        user.Any<User>(x => x.Name == _user.Name);
         user.Add(_user);
         Console.WriteLine($"Пользователь {text} был добавлен");
     }
@@ -59,7 +60,7 @@ void ExistUser()
     {
         var _user = new User();
         _user.Name = text;
-        var exist = user.IsExist(_user);
+        var exist = user.Any<User>(x => x.Name == _user.Name);
         if(exist)
         Console.WriteLine($"Пользователь {text} есть в бд");
         else
