@@ -1,4 +1,4 @@
-﻿namespace InterfaceList
+﻿namespace Repositories.Inerfaces
 {
     public interface IUser
     {

@@ -1,5 +1,4 @@
-﻿using DataBase.Command;
-using InterfaceList;
+﻿using DataBase;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModel.VmHellper;
+using Repositories;
+using Repositories.Inerfaces;
 
 namespace ViewModel
 {
@@ -14,21 +15,21 @@ namespace ViewModel
     {
         public PeopleVM()
         {
-            CommandPeople = new CommandPeople();
+            CommandPeople = new();
             PeopleList = new();
-            var data = CommandPeople.OutputPeople();
+            var data = CommandPeople.GetPeopleCollection();
 
             if (data.Count == 0)
                 CommandPeople.CreatePeople();
 
-            foreach (var res in CommandPeople.OutputPeople())
+            foreach (var res in CommandPeople.GetPeopleCollection())
                 PeopleList.Add(new PeopleData() { Id = res.Id, Name = res.Name, CompletedTasks = res.CompletedTasks, RemainsExecute = res.RemainsExecute });
 
         }
         private ObservableCollection<PeopleData> _PeopleList;
 
         public ObservableCollection<PeopleData> PeopleList { get => _PeopleList; set => Set(ref _PeopleList, value); }
-        private CommandPeople CommandPeople { get; set; }
+        private Command<People> CommandPeople { get; set; }
     }
     public class PeopleData : BaseInpc, IPeople
     {

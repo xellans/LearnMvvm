@@ -1,6 +1,4 @@
-﻿using DataBase.Command;
-using DataBase.Entity;
-using InterfaceList;
+﻿using DataBase;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -12,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using ViewModel;
 using ViewModel.VmHellper;
+using Repositories;
+using Repositories.Inerfaces;
 
 namespace ViewModel
 {
@@ -20,7 +20,7 @@ namespace ViewModel
         public AuthVM()
         {
             Instance = this;
-            CommandUser = new CommandUser();
+            CommandUser = new();
             AutnMethod();
         }
         public long _Id;
@@ -35,7 +35,7 @@ namespace ViewModel
         public static AuthVM Instance { get; set; } //Делаем Vm статической для доступа в рамках всего проекта
 
         public User User { get; set; }
-        CommandUser CommandUser { get; set; }
+        Command<User> CommandUser { get; set; }
 
         private ICommand _AddUserCommand;
         public ICommand AddUserCommand => _AddUserCommand = _AddUserCommand ?? new RelayCommand(AuthUser);
@@ -44,9 +44,9 @@ namespace ViewModel
         {
             User.IsAuthorized = true;
             User.Name = Name;
-            if (!CommandUser.IsExistUser(User))
+            if (!CommandUser.IsExist(User))
             {
-                CommandUser.AddUser(User);
+                CommandUser.Add(User);
                 NavigationVM.AuthVMClose();
             }
         }
@@ -55,7 +55,7 @@ namespace ViewModel
         /// </summary>
         void AutnMethod()
         {
-            User = CommandUser.GetUser();
+            User = CommandUser.Context.User.FirstOrDefault();
             if (User == null)
                 User = new();
             if (User.IsAuthorized)

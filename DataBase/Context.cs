@@ -1,7 +1,8 @@
-﻿using DataBase.Entity;
+﻿using DataBase;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace DataBase
 {
-    public class ApplicationContext : DbContext
+    public class Context : DbContext
     {
         public DbSet<User> User { get; set; } = null!;
         public DbSet<People> People { get; set; } = null!;
-        public DbSet<Product> Product {  get; set; } = null!;
+        public DbSet<Product> Product { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string path = "Data Base";

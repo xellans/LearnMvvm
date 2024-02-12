@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InterfaceList
+namespace Repositories.Inerfaces
 {
     public interface IProduct
     {

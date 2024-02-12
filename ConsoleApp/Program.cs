@@ -1,9 +1,8 @@
 ﻿using DataBase;
-using DataBase.Command;
-using DataBase.Entity;
+using Repositories;
 
-CommandUser commandUser = new CommandUser();
-CommandPeople commandPeople = new CommandPeople();
+Command<User> user = new Command<User>();
+Command<People> people = new Command<People>();
 
 string info = @"1 - Добавить нового пользователя
 2 - Проверить есть ли пользователь в бд
@@ -22,11 +21,11 @@ Console.WriteLine(info);
         ExistUser();
         break;
     case "3":
-        commandPeople.CreatePeople();
+        people.CreatePeople();
         Console.WriteLine("Люди были добавлены в базу");
         break;
     case "4":
-        var  array = commandPeople.OutputPeople();
+        var array = people.GetPeopleCollection();
         // Выводим весь список людей
         foreach (var person in array)
         {
@@ -43,9 +42,10 @@ void AddUser()
     string text = Console.ReadLine();
     if (text != null && text != "")
     {
-        User user = new User();
-        user.Name = text;
-        commandUser.AddUser(user);
+        User _user = new User();
+        _user.Name = text;
+        user.IsExist(_user);
+        user.Add(_user);
         Console.WriteLine($"Пользователь {text} был добавлен");
     }
     else
@@ -57,9 +57,9 @@ void ExistUser()
     string text = Console.ReadLine();
     if (text != null && text != "")
     {
-        var user = new User();
-        user.Name = text;
-        var exist = commandUser.IsExistUser(user);
+        var _user = new User();
+        _user.Name = text;
+        var exist = user.IsExist(_user);
         if(exist)
         Console.WriteLine($"Пользователь {text} есть в бд");
         else

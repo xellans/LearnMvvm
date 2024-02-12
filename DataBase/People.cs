@@ -1,16 +1,15 @@
-﻿using InterfaceList;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBase.Entity
+namespace DataBase
 {
-    public class People: IPeople
+    public class People
     {
-       public long Id { get; set; }
-       public string Name { get; set; }
+        public long Id { get; set; }
+        public string Name { get; set; }
         public int CompletedTasks { get; set; }
         public int RemainsExecute { get; set; }
     }

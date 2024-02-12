@@ -1,5 +1,4 @@
-﻿using DataBase.Command;
-using DataBase.Entity;
+﻿using DataBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ViewModel.VmHellper;
+using Repositories;
 
 namespace ViewModel
 {
@@ -18,8 +18,8 @@ namespace ViewModel
             ProductVMCommand = new RelayCommand(ActionProductVM);
             PeopleVMCommand = new RelayCommand(ActionPeopleVM);
             AuthVMClose = AuthVMCloseRun;
-            CommandUser = new CommandUser();
-            User? user = CommandUser.GetUser();
+            CommandUser = new();
+            User? user = CommandUser.Context.User.FirstOrDefault();
             if (user == null)
             {
                 AppearingUserControl = new AuthVM();
@@ -28,7 +28,8 @@ namespace ViewModel
             else
                 CurrentMenu = new PeopleVM();
         }
-        CommandUser CommandUser;
+
+        Command<User> CommandUser;
         /// <summary>
         /// Делегат для закрытия AppearingUserControl, если понадобится в коде закрыть всплывающее окно.
         /// </summary>
