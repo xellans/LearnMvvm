@@ -1,4 +1,5 @@
 ﻿using DataBase;
+using Repositories.Inerfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
-    public class Authorized
+    public class Authorized: IAuthorized
     {
         public Authorized() =>  Context = new();
         private Context Context;

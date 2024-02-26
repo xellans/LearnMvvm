@@ -13,6 +13,7 @@ using System.Windows.Controls.Primitives;
 using System.Collections.Specialized;
 using WpfCore;
 using System.Security.Cryptography;
+using Common.WpfCore;
 
 namespace ViewModel
 {
@@ -38,8 +39,8 @@ namespace ViewModel
         }
         #endregion
 
-        public ObservableCollection<ProductData> ProductDataList { get => Get<ObservableCollection<ProductData>>(); set => Set(value); }
-      
+         public ObservableCollection<ProductData> ProductDataList { get => Get<ObservableCollection<ProductData>>(); set => Set(value); }
+
         private Command<Product> CommandProduct { get; set; }
 
         public ProductData Selected { get => Get<ProductData>(); set => Set(value); }
