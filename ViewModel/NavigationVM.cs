@@ -14,26 +14,41 @@ namespace ViewModel
 {
     public class NavigationVM: ViewModelBase
     {
+        private readonly Authorized Auth;
         public NavigationVM()
         {
-            AuthVMClose = AuthVMCloseRun;
             CommandUser = new();
-            User? user = CommandUser.Context.User.FirstOrDefault();
-            if (user == null)
-            {
-                AppearingUserControl = new AuthVM();
-                CommandUser = null!;
-            }
-            else
+            User? user = CommandUser.Context.User.FirstOrDefault() ?? new User();
+            Auth = new Authorized();
+            Auth.AuthorizedChanged += Authorized_AuthorizedChanged;
+            Auth.Authorize(user.Name);
+
+            if(Auth.IsAuthorized)
                 CurrentMenu = new PeopleVM();
+            else
+            AuthVM.Instance.AuthorizeCommand = _AuthorizeCommand;
+        }
+        #region Авторизация пользователя
+        private void Authorized_AuthorizedChanged(object sender, IsAuthorizedChangedEventArgs e)
+        {
+            if (AppearingUserControl != null)
+                AppearingUserControl = null!;
+
+            if (e.IsAuthorized)
+                CurrentMenu = new PeopleVM();
+            else
+                AppearingUserControl = new AuthVM();
         }
 
+        // Команда для выполнения действия, требующего авторизации
+        private ICommand authorizeCommand;
+
+        public ICommand _AuthorizeCommand => authorizeCommand ??  new RelayCommand(AuthorizeExecute);
+
+        private void AuthorizeExecute(object name) => Auth.Authorize(name.ToString());
+        #endregion
+
         Command<User> CommandUser;
-        /// <summary>
-        /// Делегат для закрытия AppearingUserControl, если понадобится в коде закрыть всплывающее окно.
-        /// </summary>
-        public static Action AuthVMClose = null!;
-        void AuthVMCloseRun() => AppearingUserControl = null!;
 
         #region Экземляер для отображения всплывающих окон
         public object AppearingUserControl { get => Get<object>(); set { Set(value); } }

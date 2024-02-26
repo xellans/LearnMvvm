@@ -24,7 +24,7 @@ namespace Repositories
                 User? old = Context.User.FirstOrDefault(x => x.Name == name);
                 if (old is null)
                 {
-                    Context.User.Add(new User() { Name = name });
+                    Context.User.Add(new User() { Name = name, IsAuthorized = true });
                     Context.SaveChanges();
                 }
                 else
