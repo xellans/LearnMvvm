@@ -1,9 +1,19 @@
 ﻿using DataBase;
+using Microsoft.EntityFrameworkCore;
 using Repositories;
 
 Command<User> user = new Command<User>();
 
 Command<People> people = new Command<People>();
+
+people.FirstOrDefault(x => x.Name == "");
+var ss = people.Any(x => x.CompletedTasks == 1);
+var re = people.Where(x => x.Name == x.Name).ToList();
+
+Command<Product> product = new Command<Product>();
+var res = product.Where(x => x.Name == x.Name).ToList();
+var ssss = product.Any(x => x.Description == "");
+
 
 string info = @"1 - Добавить нового пользователя
 2 - Проверить есть ли пользователь в бд
@@ -45,7 +55,7 @@ void AddUser()
     {
         User _user = new User();
         _user.Name = text;
-        user.Any<User>(x => x.Name == _user.Name);
+        if(user.Any(x => x.Name == _user.Name));
         user.Add(_user);
         Console.WriteLine($"Пользователь {text} был добавлен");
     }
@@ -60,7 +70,7 @@ void ExistUser()
     {
         var _user = new User();
         _user.Name = text;
-        var exist = user.Any<User>(x => x.Name == _user.Name);
+        var exist = user.Any(x => x.Name == _user.Name);
         if(exist)
         Console.WriteLine($"Пользователь {text} есть в бд");
         else

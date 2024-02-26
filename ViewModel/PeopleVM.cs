@@ -5,18 +5,24 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ViewModel.VmHellper;
 using Repositories;
 using Repositories.Inerfaces;
+using WpfCore;
 
 namespace ViewModel
 {
-    public class PeopleVM: BaseInpc
+    public class PeopleVM: ViewModelBase
     {
         public PeopleVM()
         {
             CommandPeople = new();
             PeopleList = new();
+            Load();
+
+        }
+        #region Заполнение данными
+        private void Load()
+        {
             var data = CommandPeople.GetPeopleCollection();
 
             if (data.Count == 0)
@@ -24,25 +30,19 @@ namespace ViewModel
 
             foreach (var res in CommandPeople.GetPeopleCollection())
                 PeopleList.Add(new PeopleData() { Id = res.Id, Name = res.Name, CompletedTasks = res.CompletedTasks, RemainsExecute = res.RemainsExecute });
-
         }
-        private ObservableCollection<PeopleData> _PeopleList;
-
-        public ObservableCollection<PeopleData> PeopleList { get => _PeopleList; set => Set(ref _PeopleList, value); }
+        #endregion
+        public ObservableCollection<PeopleData> PeopleList { get => Get<ObservableCollection<PeopleData>>(); set => Set(value); }
         private Command<People> CommandPeople { get; set; }
     }
-    public class PeopleData : BaseInpc, IPeople
+    public class PeopleData : ViewModelBase, IPeople
     {
-        private long _Id;
-        public long Id { get => _Id; set => Set(ref _Id, value); }
+        public long Id { get => Get<long>(); set => Set(value); }
 
-        private string _Name;
-        public string Name { get => _Name; set => Set(ref _Name, value); }
+        public string Name { get => Get<string>(); set => Set(value); }
 
-        private int _CompletedTasks;
-        public int CompletedTasks { get => _CompletedTasks; set => Set(ref _CompletedTasks, value); }
+        public int CompletedTasks { get => Get<int>(); set => Set(value); }
 
-        private int _RemainsExecute;
-        public int RemainsExecute { get => _RemainsExecute; set => Set(ref _RemainsExecute, value); }
+        public int RemainsExecute { get => Get<int>(); set => Set(value); }
     }
 }

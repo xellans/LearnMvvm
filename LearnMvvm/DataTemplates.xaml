@@ -15,4 +15,8 @@
     <DataTemplate DataType="{x:Type vm:ProductVM}">
         <userControls:ProductUserControl />
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:SettingVM}">
+        <userControls:SettingUserControl />
+    </DataTemplate>
 </ResourceDictionary>

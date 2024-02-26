@@ -101,14 +101,14 @@
         <Setter Property="HeadersVisibility" Value="Column"/>
         <Setter Property="CanUserAddRows" Value="False"/>
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-        <Setter Property="BorderBrush" Value="#0D1D37"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush2}"/>
         <Setter Property="BorderThickness" Value="0 1 1 0"/>
         <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="FontSize" Value="14"></Setter>
-        <Setter Property="Foreground" Value="#FFFCFDFF"/>
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}"/>
         <Setter Property="FontWeight" Value="UltraBold"></Setter>
         <Setter Property="FontFamily" Value="Cascadia Code ExtraLight"></Setter>
         <Setter Property="Template">

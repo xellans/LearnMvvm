@@ -13,8 +13,16 @@ namespace Repositories.Inerfaces
         ReadOnlyObservableCollection<People> GetPeopleCollection();
         ReadOnlyObservableCollection<Product> GetProductCollection();
 
-        bool Any<T>(Func<T, bool> predicate) where T : class;
-        T? Remove(T t);
+        T? FirstOrDefault();
+
+        T? FirstOrDefault(Func<T, bool> predicate);
+        IEnumerable<T> Where(Func<T, bool> predicate);
+
+        bool Any(Func<T, bool> predicate);
+        void Remove(T t);
+        void Remove(int Id);
+        void Update(T t);
+        void Update(object NewValue, int Id);
         T? Clone(T t);
         T? Add(T t);
     }

@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+    <sys:String x:Key="Lang1">Tasks Statistics</sys:String>
+    <sys:String x:Key="Lang2">Product List</sys:String>
+    <sys:String x:Key="Lang3">Settings</sys:String>
+    <sys:String x:Key="Lang4">Username</sys:String>
+    <sys:String x:Key="Lang5">Tasks Completed</sys:String>
+    <sys:String x:Key="Lang6">Tasks Remaining</sys:String>
+    <sys:String x:Key="Lang7">Name</sys:String>
+    <sys:String x:Key="Lang8">Description</sys:String>
+    <sys:String x:Key="Lang9">Save Changes</sys:String>
+    <sys:String x:Key="Lang10">Add</sys:String>
+    <sys:String x:Key="Lang11">Delete</sys:String>
+    <sys:String x:Key="Lang12">Dark Theme</sys:String>
+    <sys:String x:Key="Lang13">Light Theme</sys:String>
+</ResourceDictionary>

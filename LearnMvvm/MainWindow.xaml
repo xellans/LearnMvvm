@@ -21,7 +21,7 @@
             <!--Окно регистрации-->
             <ContentControl d:Visibility="Collapsed" Content="{Binding AppearingUserControl}" Panel.ZIndex="1" Grid.RowSpan="100" Grid.ColumnSpan="100"></ContentControl>
             <!--Отступ сверху -35 для того чтобы сравнять лого с размером размера заголовка окна-->
-            <Border Grid.Row="0" BorderBrush="#0D1D37" BorderThickness="0 0 1 0" Margin=" 0 -35 0 0">
+            <Border Grid.Row="0" BorderBrush="{DynamicResource Brush2}" BorderThickness="0 0 1 0" Margin=" 0 -35 0 0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
@@ -29,14 +29,11 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock FontSize="28" FontFamily="Yu Gothic" Foreground="#6880AA" Margin="10 0 0 0" FontStyle="Italic">Exemple project</TextBlock>
+                    <TextBlock FontSize="26" FontFamily="Yu Gothic" Foreground="#6880AA" Margin="10 0 0 0" FontStyle="Italic">Exemple project</TextBlock>
                     <StackPanel Grid.Row="1">
-                        <RadioButton Command="{Binding PeopleVMCommand}">Статистика заданий</RadioButton>
-                        <RadioButton Command="{Binding ProductVMCommand}">Список товаров</RadioButton>
-                        <RadioButton>Главная</RadioButton>
-                        <RadioButton>Главная</RadioButton>
-                        <RadioButton>Главная</RadioButton>
-                        <RadioButton>Главная</RadioButton>
+                        <RadioButton Command="{Binding PeopleVMCommand}" Content="{DynamicResource Lang1}"></RadioButton>
+                        <RadioButton Command="{Binding ProductVMCommand}" Content="{DynamicResource Lang2}"></RadioButton>
+                        <RadioButton Command="{Binding SettingVMCommand}" Content="{DynamicResource Lang3}"></RadioButton>
                     </StackPanel>
                 </Grid>
             </Border>

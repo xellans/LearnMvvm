@@ -22,5 +22,25 @@ namespace DataBase
                 Directory.CreateDirectory(path);
             optionsBuilder.UseSqlite(@$"Data Source={path}\\Data Base.db");
         }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Product>(e =>
+        //    {
+        //        e.Property(x => x.Id);
+        //    });
+        //}
+    }
+    public class Repo<T> where T : Context
+    {
+
+        public IList<T> GetList()
+        {
+            using (var context = new Context())
+            {
+
+                return context.Set<T>().ToList();
+            }
+        }
+
     }
 }

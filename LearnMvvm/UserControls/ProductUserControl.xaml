@@ -6,11 +6,37 @@
              xmlns:local="clr-namespace:LearnMvvm.UserControls"
              mc:Ignorable="d" 
              xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
-             d:DesignHeight="434" d:DesignWidth="540" Background="#293955">
+             d:DesignHeight="434" d:DesignWidth="540" Background="{DynamicResource Brush1}">
     <UserControl.DataContext>
         <vm:ProductVM/>
     </UserControl.DataContext>
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <TextBlock Text="{DynamicResource Lang7}" Margin="10 5 0 0"></TextBlock>
+            <TextBox Margin="10 5 10 0" Text="{Binding Selected.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBlock Text="{DynamicResource Lang8}" Margin="10 5 0 0"></TextBlock>
+            <TextBox Margin="10 5 10 0" Text="{Binding Selected.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Button Margin="10 5 10 0" Content="{DynamicResource Lang9}" Command="{Binding SaveEdit}"></Button>
+            <Button Margin="10 5 10 0" Content="{DynamicResource Lang10}" Command="{Binding Add}"></Button>
+            <Button Margin="10 5 10 0" Content="{DynamicResource Lang11}" Command="{Binding Delete}"></Button>
+        </StackPanel>
+        <ListBox x:Name="LbProduct"
+                 Grid.Column="1" 
+                 Margin="1 0 0 0"
+                 ItemsSource="{Binding ProductDataList}"
+                 SelectedItem="{Binding Selected}">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="ListBox">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}"></TextBlock>
+                        <TextBlock Margin="0 4 0 0" Text="{Binding Description}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>

@@ -1,14 +1,21 @@
 ﻿using DataBase;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using Repositories.Inerfaces;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
+using System.Globalization;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Xml.Linq;
 
 namespace Repositories
 {
-    public class Command<T> : IRepository<T>
+    public class Command<T> : IRepository<T> where T : class
     {
         public Context Context; //*Сделал публичным так как реализованы не все функции ef, сейчас они не нужны для реализации. Но можно сделать позже.
                                 //Потом сделаю это свойство приватным*//
@@ -19,6 +26,120 @@ namespace Repositories
             Context.People.Load();
             Context.Product.Load();
         }
+        /// <summary>
+        /// Возвращает первый найденный элемент или null
+        /// </summary>
+        /// <param name="Expression"></param>
+        /// <returns></returns>
+        public T? FirstOrDefault(Func<T, bool> Expression) => Context.Set<T>().FirstOrDefault(Expression);
+
+        public T? FirstOrDefault() => Context.Set<T>().FirstOrDefault();
+
+        /// <summary>
+        /// Возвращает true, если хотя бы один элемент коллекции соответсвует определенному условию
+        /// </summary>
+        /// <param name="Expression"></param>
+        /// <returns></returns>
+
+        public bool Any(Func<T, bool> Expression) => Context.Set<T>().Any(Expression);
+
+        /// <summary>
+        ///  Проецирует последовательность
+        /// </summary>
+        /// <param name="Expression"></param>
+        /// <returns></returns>
+        public IEnumerable<T> Where(Func<T, bool> Expression) => Context.Set<T>().Where(Expression);
+
+        /// <summary>
+        /// Добавить новый элемент в бд
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public T Add(T t)
+        {
+            Context.Add(t);
+            Context.SaveChanges();
+            return t;
+        }
+
+        public T Clone(T t) => t;
+
+        /// <summary>
+        /// Удаление объекта из бд
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public void Remove(int Id)
+        {
+            var entity = Context.Set<T>().Find(Id);
+            if (entity != null)
+            {
+                Context.Remove(entity);
+                Context.SaveChanges();
+            }
+        }
+        public void Remove(T t)
+        {
+            if (t != null)
+            {
+                Context.Remove(t);
+                Context.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Обновление данных в бд
+        /// </summary>
+        /// <param name="NewValue"></param>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public void Update(object NewValue, int Id)
+        {
+            var entity = Context.Set<T>().Find(Id);
+            if (entity != null)
+            {
+                Context.Entry(entity).CurrentValues.SetValues(NewValue);
+                Context.SaveChanges();
+            }
+        }
+        public void Update(T t)
+        {
+            if (t != null)
+            {
+                Context.Update(t);
+                Context.SaveChanges();
+            }
+        }
+        /// <summary>
+        /// Копирование свойств из одного класса в другой
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="destination"></param>
+        public void CopyProperties(object source, object destination)
+        {
+            Type sourceType = source.GetType();
+            Type destinationType = destination.GetType();
+
+            PropertyInfo[] sourceProperties = sourceType.GetProperties();
+
+            foreach (PropertyInfo sourceProperty in sourceProperties)
+            {
+                PropertyInfo destinationProperty = destinationType.GetProperty(sourceProperty.Name);
+
+                if (destinationProperty != null && destinationProperty.CanWrite)
+                {
+                    object value = sourceProperty.GetValue(source);
+                    destinationProperty.SetValue(destination, value);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Сохранить изменения
+        /// </summary>
+        public void SaveChanges() => Context.SaveChanges();
         /// <summary>
         /// Список людей
         /// </summary>
@@ -31,74 +152,6 @@ namespace Repositories
         /// </summary>
         /// <returns></returns>
         public ReadOnlyObservableCollection<Product> GetProductCollection() => new ReadOnlyObservableCollection<Product>(Context.Product.Local.ToObservableCollection());
-       
-    
-
-        /// <summary>
-        /// Проверка на наличие в бд.
-        /// </summary>
-        /// <param name="t"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public bool Any<T>(Func<T, bool> predicate) where T : class =>  Context.Set<T>().Any(predicate);
-        /// <summary>
-        /// Проецирует последовательность
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        public IEnumerable<T> Where<T>(Func<T, bool> predicate) where T : class => Context.Set<T>().Where(predicate);
-        /// <summary>
-        /// Возвращает первый найденный элемент
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        public T? FirstOrDefault<T>(Func<T, bool> predicate) where T : class => Context.Set<T>().FirstOrDefault(predicate);
-
-       /// <summary>
-       /// Сохранить изменения
-       /// </summary>
-        public void SaveChanges() => Context.SaveChanges();
-
-
-        /// <summary>
-        /// Добавить новый элемент в бд
-        /// </summary>
-        /// <param name="t"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public T? Add(T t)
-        {
-            try
-            {
-                Context.Add(t);
-                Context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception();
-            }
-            return t;
-        }
-
-        public T Clone(T t) => t;
-
-        /// <summary>
-        /// Удаление объекта из бд
-        /// </summary>
-        /// <param name="t"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public T? Remove(T t)
-        {
-            if (t == null)
-                throw new ArgumentNullException($"Ошибка при удалении {t?.GetType().Name}, значение объекта равно null");
-            Context.Remove(t);
-            Context.SaveChanges();
-            return t;
-        }
-
 
         #region Заполнение бд, нужно только для примера.
         public void CreatePeople()

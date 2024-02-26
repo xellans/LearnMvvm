@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace LearnMvvm.UserControls
 {
     /// <summary>
-    /// Логика взаимодействия для CompanyUserControl.xaml
+    /// Логика взаимодействия для SettingUserControl.xaml
     /// </summary>
-    public partial class CompanyUserControl : UserControl
+    public partial class SettingUserControl : UserControl
     {
-        public CompanyUserControl()
+        public SettingUserControl()
         {
             InitializeComponent();
         }
