@@ -27,18 +27,7 @@ namespace Repositories
                     Context.User.Add(new User() { Name = name, IsAuthorized = true });
                     Context.SaveChanges();
                 }
-                else
-                {
-                    old.Name = name!;
-                    Context.User.Update(old);
-                    Context.SaveChanges();
-                }
             }
-            else
-            {
-                Context.SaveChanges();
-            }
-
             IsAuthorized = args.IsAuthorized;
             AuthorizedChanged?.Invoke(this, args);
         }

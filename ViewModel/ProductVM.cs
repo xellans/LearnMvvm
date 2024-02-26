@@ -82,7 +82,7 @@ namespace ViewModel
             };
             var temp = CommandProduct.Add(product);
             var newProductData = new ProductData();
-            CommandProduct.CopyProperties(temp, newProductData);
+            Mapper.CopyProperties(temp, newProductData);
             ProductDataList.Add(newProductData);
         }
         #endregion
