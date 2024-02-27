@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Inerfaces
+namespace DataBase
 {
-    public interface IPeople
+    public class Person
     {
         public long Id { get; set; }
         public string Name { get; set; }
         public int CompletedTasks { get; set; }
-        public int RemainsExecute {  get; set; }
+        public int RemainsExecute { get; set; }
     }
 }

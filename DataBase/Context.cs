@@ -13,7 +13,7 @@ namespace DataBase
     public class Context : DbContext
     {
         public DbSet<User> User { get; set; } = null!;
-        public DbSet<People> People { get; set; } = null!;
+        public DbSet<Person> Person { get; set; } = null!;
         public DbSet<Product> Product { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -10,9 +10,7 @@ namespace Repositories.Inerfaces
 {
     public interface IRepository<T>
     {
-        ReadOnlyObservableCollection<People> GetPeopleCollection();
-        ReadOnlyObservableCollection<Product> GetProductCollection();
-
+        void Load();
         T? FirstOrDefault();
 
         T? FirstOrDefault(Func<T, bool> predicate);
@@ -25,5 +23,6 @@ namespace Repositories.Inerfaces
         void Update(object NewValue, int Id);
         T? Clone(T t);
         T? Add(T t);
+        ReadOnlyObservableCollection<T> ToObservableCollections();
     }
 }

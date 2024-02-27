@@ -1,18 +1,11 @@
 ﻿using DataBase;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
+using Repositories.Realisation;
 
-Command<User> user = new Command<User>();
+UserRepository User = new UserRepository();
 
-Command<People> people = new Command<People>();
-
-people.FirstOrDefault(x => x.Name == "");
-var ss = people.Any(x => x.CompletedTasks == 1);
-var re = people.Where(x => x.Name == x.Name).ToList();
-
-Command<Product> product = new Command<Product>();
-var res = product.Where(x => x.Name == x.Name).ToList();
-var ssss = product.Any(x => x.Description == "");
+PersonRepository Person = new PersonRepository();
 
 
 string info = @"1 - Добавить нового пользователя
@@ -32,11 +25,11 @@ Console.WriteLine(info);
         ExistUser();
         break;
     case "3":
-        people.CreatePeople();
+        Person.CreatePerson();
         Console.WriteLine("Люди были добавлены в базу");
         break;
     case "4":
-        var array = people.GetPeopleCollection();
+        var array = Person.PersonCollections;
         // Выводим весь список людей
         foreach (var person in array)
         {
@@ -55,8 +48,8 @@ void AddUser()
     {
         User _user = new User();
         _user.Name = text;
-        if(user.Any(x => x.Name == _user.Name));
-        user.Add(_user);
+        if(User.Command.Any(x => x.Name == _user.Name));
+        User.Command.Add(_user);
         Console.WriteLine($"Пользователь {text} был добавлен");
     }
     else
@@ -70,7 +63,7 @@ void ExistUser()
     {
         var _user = new User();
         _user.Name = text;
-        var exist = user.Any(x => x.Name == _user.Name);
+        var exist = User.Command.Any(x => x.Name == _user.Name);
         if(exist)
         Console.WriteLine($"Пользователь {text} есть в бд");
         else

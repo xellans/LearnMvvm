@@ -14,6 +14,7 @@ using System.Collections.Specialized;
 using WpfCore;
 using System.Security.Cryptography;
 using Common.WpfCore;
+using Repositories.Realisation;
 
 namespace ViewModel
 {
@@ -21,7 +22,7 @@ namespace ViewModel
     {
         public ProductVM()
         {
-            CommandProduct = new();
+            Product = new();
             ProductDataList = new();
             Load();
             Selected = new ProductData();
@@ -29,19 +30,14 @@ namespace ViewModel
         #region Заполнение данными
         private void Load()
         {
-            var data = CommandProduct.GetProductCollection();
-
-            if (data.Count == 0)
-                CommandProduct.CreateProduct();
-
-            foreach (var res in CommandProduct.GetProductCollection())
+            foreach (var res in Product.ProductCollections)
                 ProductDataList.Add(new ProductData() { Id = res.Id, Name = res.Name, Description = res.Description });
         }
         #endregion
 
          public ObservableCollection<ProductData> ProductDataList { get => Get<ObservableCollection<ProductData>>(); set => Set(value); }
 
-        private Command<Product> CommandProduct { get; set; }
+        private ProductRepository  Product { get; set; }
 
         public ProductData Selected { get => Get<ProductData>(); set => Set(value); }
         #region Сохранение изменений
@@ -51,7 +47,7 @@ namespace ViewModel
         private void SaveEditExcute()
         {
             if (Selected != null)
-                CommandProduct.Update(Selected, Selected.Id);
+                Product.Command.Update(Selected, Selected.Id);
         }
         #endregion
 
@@ -63,7 +59,7 @@ namespace ViewModel
         {
             if (Selected != null)
             {
-                CommandProduct.Remove(Selected.Id);
+                Product.Command.Remove(Selected.Id);
                 ProductDataList.Remove(Selected);
                 Selected = ProductDataList.LastOrDefault();
             }
@@ -76,14 +72,9 @@ namespace ViewModel
         public ICommand Add => _Add ?? new RelayCommand(AddExcute);
         private void AddExcute()
         {
-            Product product = new Product()
-            {
-                Name = Selected.Name,
-                Description = Selected.Description
-            };
-            var temp = CommandProduct.Add(product);
-            var newProductData = new ProductData();
-            Mapper.CopyProperties(temp, newProductData);
+            var newProduct = Product.Add(Selected);
+            ProductData newProductData = new();
+            Mapper.CopyProperties(newProduct, newProductData);
             ProductDataList.Add(newProductData);
         }
         #endregion

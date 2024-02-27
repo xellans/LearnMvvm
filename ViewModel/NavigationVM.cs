@@ -24,7 +24,7 @@ namespace ViewModel
             Auth.Authorize(user.Name);
 
             if(Auth.IsAuthorized)
-                CurrentMenu = new PeopleVM();
+                CurrentMenu = new PersonVM();
             else
             AuthVM.Instance.AuthorizeCommand = _AuthorizeCommand;
         }
@@ -35,7 +35,7 @@ namespace ViewModel
                 AppearingUserControl = null!;
 
             if (e.IsAuthorized)
-                CurrentMenu = new PeopleVM();
+                CurrentMenu = new PersonVM();
             else
                 AppearingUserControl = new AuthVM();
         }
@@ -59,8 +59,8 @@ namespace ViewModel
         #endregion
 
         #region PeopleVMCommand
-        private ICommand _PeopleVMCommand;
-        public ICommand PeopleVMCommand => _PeopleVMCommand = _PeopleVMCommand ?? new RelayCommand(() => { CurrentMenu = new PeopleVM(); });
+        private ICommand _PersonVMCommand;
+        public ICommand PersonVMCommand => _PersonVMCommand = _PersonVMCommand ?? new RelayCommand(() => { CurrentMenu = new PersonVM(); });
         #endregion
 
         #region ProductVMCommand
