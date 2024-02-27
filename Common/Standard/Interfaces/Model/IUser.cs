@@ -1,4 +1,4 @@
-﻿namespace Repositories.Inerfaces
+﻿namespace Common.Standard.Interfaces.Model
 {
     public interface IUser
     {

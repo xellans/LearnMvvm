@@ -1,35 +1,36 @@
-﻿using DataBase;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using ViewModel;
-using Repositories;
-using Repositories.Inerfaces;
+﻿using Common.Standard.Interfaces.Model;
+using Common.Standard.Interfaces.ViewModel;
 using WpfCore;
 
 namespace ViewModel
 {
-    public class AuthVM : ViewModelBase
+    public class AuthVM : ViewModelBase, IAuthVM
     {
-        public AuthVM()
+        private readonly IAuthorized authorized;
+
+        public AuthVM(IAuthorized authorized)
         {
-            Instance = this;
+            this.authorized = authorized;
+
+            authorized.AuthorizedChanged += OnAuthorizedChanged;
+
+            AuthorizeCommand = new RelayCommand(() =>
+            {
+                authorized.Authorize(Name);
+            });
         }
-        public ICommand AuthorizeCommand { get; set; }
+
+        private void OnAuthorizedChanged(object? sender, IsAuthorizedChangedEventArgs e)
+        {
+            RaisePropertyChanged(nameof(IsAuthorized));
+        }
+
+        public RelayCommand AuthorizeCommand { get; }
 
         public long Id { get => Get<long>(); set => Set(value); }
 
-        public string Name { get => Get<string>(); set => Set(value); }
+        public string? Name { get => Get<string>(); set => Set(value); }
 
-        public bool IsAuthorized { get => Get<bool>(); set => Set(value); }
-
-        public static AuthVM Instance { get; set; } //Делаем Vm статической для доступа в рамках всего проекта
-
+        public bool IsAuthorized => authorized.IsAuthorized;
     }
 }

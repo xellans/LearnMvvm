@@ -1,4 +1,5 @@
-﻿using DataBase;
+﻿using Common.Standard.Interfaces.Model;
+using DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using Repositories.Inerfaces;

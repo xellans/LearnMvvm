@@ -1,20 +1,7 @@
-﻿using DataBase;
-using System;
-using System.Collections.Generic;
+﻿using Common.Standard.Interfaces.Model;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Repositories;
-using Repositories.Inerfaces;
 using System.Windows.Input;
-using Microsoft.EntityFrameworkCore;
-using System.Windows.Controls.Primitives;
-using System.Collections.Specialized;
 using WpfCore;
-using System.Security.Cryptography;
-using Common.WpfCore;
-using Repositories.Realisation;
 
 namespace ViewModel
 {
@@ -22,7 +9,7 @@ namespace ViewModel
     {
         public ProductVM()
         {
-            Product = new();
+            //Product = new();
             ProductDataList = new();
             Load();
             Selected = new ProductData();
@@ -30,14 +17,14 @@ namespace ViewModel
         #region Заполнение данными
         private void Load()
         {
-            foreach (var res in Product.ProductCollections)
-                ProductDataList.Add(new ProductData() { Id = res.Id, Name = res.Name, Description = res.Description });
+            //foreach (var res in Product.ProductCollections)
+            //    ProductDataList.Add(new ProductData() { Id = res.Id, Name = res.Name, Description = res.Description });
         }
         #endregion
 
          public ObservableCollection<ProductData> ProductDataList { get => Get<ObservableCollection<ProductData>>(); set => Set(value); }
 
-        private ProductRepository  Product { get; set; }
+        private readonly IRepository<IProduct> products;
 
         public ProductData Selected { get => Get<ProductData>(); set => Set(value); }
         #region Сохранение изменений
@@ -46,8 +33,8 @@ namespace ViewModel
         public ICommand SaveEdit => _SaveEdit ??  new RelayCommand(SaveEditExcute);
         private void SaveEditExcute()
         {
-            if (Selected != null)
-                Product.Command.Update(Selected, Selected.Id);
+            //if (Selected != null)
+            //    Product.Command.Update(Selected, Selected.Id);
         }
         #endregion
 
@@ -59,7 +46,7 @@ namespace ViewModel
         {
             if (Selected != null)
             {
-                Product.Command.Remove(Selected.Id);
+                //Product.Command.Remove(Selected.Id);
                 ProductDataList.Remove(Selected);
                 Selected = ProductDataList.LastOrDefault();
             }
@@ -72,10 +59,10 @@ namespace ViewModel
         public ICommand Add => _Add ?? new RelayCommand(AddExcute);
         private void AddExcute()
         {
-            var newProduct = Product.Add(Selected);
-            ProductData newProductData = new();
-            Mapper.CopyProperties(newProduct, newProductData);
-            ProductDataList.Add(newProductData);
+            //var newProduct = Product.Add(Selected);
+            //ProductData newProductData = new();
+            //Mapper.CopyProperties(newProduct, newProductData);
+            //ProductDataList.Add(newProductData);
         }
         #endregion
     }

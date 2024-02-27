@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace DataBase
 {
-    public class User
+    internal class User
     {
         public long Id { get; set; }
         /// <summary>

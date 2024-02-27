@@ -9,6 +9,7 @@ using System.Windows.Input;
 using Repositories;
 using System.Windows;
 using WpfCore;
+using Common.Standard.Interfaces.Model;
 
 namespace ViewModel
 {

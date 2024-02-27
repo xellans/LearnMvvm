@@ -1,12 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Realisation\**" />
+    <EmbeddedResource Remove="Realisation\**" />
+    <None Remove="Realisation\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Command.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\DataBase\DataBase.csproj" />
   </ItemGroup>
 

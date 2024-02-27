@@ -8,10 +8,11 @@
         xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
         mc:Ignorable="d"
         Style="{StaticResource CustomWindowStyle}"
-        Height="450" Width="800">
-    <Window.DataContext>
+        Height="450" Width="800"
+        DataContext="{DynamicResource locator}">
+    <!--<Window.DataContext>
         <vm:NavigationVM/>
-    </Window.DataContext>
+    </Window.DataContext>-->
     <Border>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -19,7 +20,17 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <!--Окно регистрации-->
-            <ContentControl d:Visibility="Collapsed" Content="{Binding AppearingUserControl}" Panel.ZIndex="1" Grid.RowSpan="100" Grid.ColumnSpan="100"></ContentControl>
+            <ContentControl d:Visibility="Visible" Content="{Binding AuthVM}" Panel.ZIndex="1" Grid.RowSpan="100" Grid.ColumnSpan="100">
+                <ContentControl.Style>
+                    <Style TargetType="ContentControl">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding AuthVM.IsAuthorized}" Value="True">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
             <!--Отступ сверху -35 для того чтобы сравнять лого с размером размера заголовка окна-->
             <Border Grid.Row="0" BorderBrush="{DynamicResource Brush2}" BorderThickness="0 0 1 0" Margin=" 0 -35 0 0">
                 <Grid>
@@ -31,14 +42,14 @@
                     </Grid.RowDefinitions>
                     <TextBlock FontSize="26" FontFamily="Yu Gothic" Foreground="#6880AA" Margin="10 0 0 0" FontStyle="Italic">Exemple project</TextBlock>
                     <StackPanel Grid.Row="1">
-                        <RadioButton Command="{Binding PersonVMCommand}" Content="{DynamicResource Lang1}"></RadioButton>
-                        <RadioButton Command="{Binding ProductVMCommand}" Content="{DynamicResource Lang2}"></RadioButton>
-                        <RadioButton Command="{Binding SettingVMCommand}" Content="{DynamicResource Lang3}"></RadioButton>
+                        <RadioButton Command="{Binding SetCurrentContext}" Content="{DynamicResource Lang1}" CommandParameter="AuthVM"></RadioButton>
+                        <RadioButton Command="{Binding SetCurrentContext}" Content="{DynamicResource Lang2}"></RadioButton>
+                        <RadioButton Command="{Binding SetCurrentContext}" Content="{DynamicResource Lang3}"></RadioButton>
                     </StackPanel>
                 </Grid>
             </Border>
             <Grid Grid.Column="1">
-                <ContentControl Content="{Binding CurrentMenu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ContentControl>
+                <ContentControl Content="{Binding CurrentContext, Mode=OneWay}"></ContentControl>
             </Grid>
         </Grid>
     </Border>

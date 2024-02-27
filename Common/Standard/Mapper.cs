@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 
-namespace Repositories
+namespace Standard
 {
     public static class Mapper
     {
@@ -23,11 +18,11 @@ namespace Repositories
 
             foreach (PropertyInfo sourceProperty in sourceProperties)
             {
-                PropertyInfo destinationProperty = destinationType.GetProperty(sourceProperty.Name);
+                PropertyInfo? destinationProperty = destinationType.GetProperty(sourceProperty.Name);
 
-                if (destinationProperty != null && destinationProperty.CanWrite)
+                if (destinationProperty is not null && destinationProperty.CanWrite)
                 {
-                    object value = sourceProperty.GetValue(source);
+                    object? value = sourceProperty.GetValue(source);
                     destinationProperty.SetValue(destination, value);
                 }
             }
