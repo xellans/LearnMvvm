@@ -9,7 +9,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="root" Background="#293955">
+                    <Border x:Name="root" Background="{DynamicResource Brush1}">
                         <ContentPresenter/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -59,7 +59,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="root" Background="#293955">
+                    <Border x:Name="root" Background="{DynamicResource Brush1}">
                         <Viewbox Width="14" Height="12">
                             <Grid>
                                 <Path x:Name="s1" Stroke="Black" StrokeThickness="0.8" StrokeStartLineCap="Round"  StrokeEndLineCap="Round" 
@@ -92,7 +92,7 @@
                               UseAeroCaptionButtons="True" />
             </Setter.Value>
         </Setter>
-        <Setter Property="Background" Value="#293955" />
+        <Setter Property="Background" Value="{DynamicResource Brush1}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Window}">
@@ -103,7 +103,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                                 <RowDefinition Height="auto"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Grid Grid.Row="0" VerticalAlignment="Top" Height="35" Margin="230 0 0 0" Background="#293955">
+                            <Grid Grid.Row="0" VerticalAlignment="Top" Height="35" Margin="230 0 0 0" Background="{DynamicResource Brush1}">
                                 <StackPanel x:Name="Buttons" Orientation="Horizontal" HorizontalAlignment="Right">
                                     <Button Name="btnMinimize" Style="{StaticResource TopPanelBtn}" ContentTemplate="{StaticResource ContentBtnMinimize}" Width="45" Command="{x:Static local:CustomWindow.MinimizeCommand}"></Button>
                                     <Button Name="btnRestore" Style="{DynamicResource TopPanelBtn}" ContentTemplate="{StaticResource ContentBtnRestore}" Width="45" Command="{x:Static local:CustomWindow.MaximizeRestoreCommand}"></Button>

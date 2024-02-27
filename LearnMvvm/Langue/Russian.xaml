@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+    <sys:String x:Key="Lang1">Статистика заданий</sys:String>
+    <sys:String x:Key="Lang2">Список товаров</sys:String>
+    <sys:String x:Key="Lang3">Настройки</sys:String>
+    <sys:String x:Key="Lang4">Имя пользователя</sys:String>
+    <sys:String x:Key="Lang5">Выполнено заданий</sys:String>
+    <sys:String x:Key="Lang6">Осталось выполнить</sys:String>
+    <sys:String x:Key="Lang7">Название</sys:String>
+    <sys:String x:Key="Lang8">Описание</sys:String>
+    <sys:String x:Key="Lang9">Сохранить изменения</sys:String>
+    <sys:String x:Key="Lang10">Добавить</sys:String>
+    <sys:String x:Key="Lang11">Удалить</sys:String>
+    <sys:String x:Key="Lang12">Тёмная тема</sys:String>
+    <sys:String x:Key="Lang13">Светлая тема</sys:String>
+</ResourceDictionary>

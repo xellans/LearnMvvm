@@ -9,7 +9,16 @@
                 <ResourceDictionary Source="Styles/CustomWindow.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Styles/RadioButtonStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Styles/DataGridStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/ListBoxStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/TextBlockStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/TextBoxStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/ButtonStyle.xaml"></ResourceDictionary>
+
+                
                 <ResourceDictionary Source="DataTemplates.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Themes/DarkTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Langue/Russian.xaml"></ResourceDictionary>
+
             </ResourceDictionary.MergedDictionaries>
 
         </ResourceDictionary>

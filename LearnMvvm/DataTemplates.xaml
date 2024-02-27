@@ -8,11 +8,15 @@
         <local:AuthUserControl />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:PeopleVM}">
+    <DataTemplate DataType="{x:Type vm:PersonVM}">
         <userControls:PeopleInfo />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm:ProductVM}">
         <userControls:ProductUserControl />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:SettingVM}">
+        <userControls:SettingUserControl />
     </DataTemplate>
 </ResourceDictionary>

@@ -5,7 +5,7 @@
         <Setter Property="Padding" Value="14 0 0 0"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="FontSize" Value="14"></Setter>
-        <Setter Property="Foreground" Value="#FFFCFDFF"/>
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}"/>
         <Setter Property="FontWeight" Value="UltraBold"></Setter>
         <Setter Property="FontFamily" Value="Cascadia Code ExtraLight"></Setter>
         <Setter Property="Template">
@@ -16,10 +16,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" Value="#0D1D37" TargetName="templateRoot"></Setter>
+                            <Setter Property="Background" Value="{DynamicResource Brush2}" TargetName="templateRoot"></Setter>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="true">
-                            <Setter Property="Background" Value="#0D1D37" TargetName="templateRoot"></Setter>
+                            <Setter Property="Background" Value="{DynamicResource Brush2}" TargetName="templateRoot"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

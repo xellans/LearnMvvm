@@ -1,45 +1,90 @@
-﻿using DataBase.Command;
-using InterfaceList;
+﻿using DataBase;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ViewModel.VmHellper;
+using Repositories;
+using Repositories.Inerfaces;
+using System.Windows.Input;
+using Microsoft.EntityFrameworkCore;
+using System.Windows.Controls.Primitives;
+using System.Collections.Specialized;
+using WpfCore;
+using System.Security.Cryptography;
+using Common.WpfCore;
+using Repositories.Realisation;
 
 namespace ViewModel
 {
-    public class ProductVM: BaseInpc
+    public class ProductVM: ViewModelBase
     {
         public ProductVM()
         {
-            CommandProduct = new CommandProduct();
-            PeopleList = new();
-            var data = CommandProduct.OutputProduct();
-
-            if (data.Count == 0)
-                CommandProduct.CreateProduct();
-
-            foreach (var res in CommandProduct.OutputProduct())
-                PeopleList.Add(new ProductData() { Id = res.Id, Name = res.Name, Description = res.Description});
-
+            Product = new();
+            ProductDataList = new();
+            Load();
+            Selected = new ProductData();
         }
-        private ObservableCollection<ProductData> _PeopleList;
+        #region Заполнение данными
+        private void Load()
+        {
+            foreach (var res in Product.ProductCollections)
+                ProductDataList.Add(new ProductData() { Id = res.Id, Name = res.Name, Description = res.Description });
+        }
+        #endregion
 
-        public ObservableCollection<ProductData> PeopleList { get => _PeopleList; set => Set(ref _PeopleList, value); }
-      
-        private CommandProduct CommandProduct { get; set; }
+         public ObservableCollection<ProductData> ProductDataList { get => Get<ObservableCollection<ProductData>>(); set => Set(value); }
+
+        private ProductRepository  Product { get; set; }
+
+        public ProductData Selected { get => Get<ProductData>(); set => Set(value); }
+        #region Сохранение изменений
+
+        private ICommand _SaveEdit;
+        public ICommand SaveEdit => _SaveEdit ??  new RelayCommand(SaveEditExcute);
+        private void SaveEditExcute()
+        {
+            if (Selected != null)
+                Product.Command.Update(Selected, Selected.Id);
+        }
+        #endregion
+
+        #region Удаление записей
+
+        private ICommand _Delete;
+        public ICommand Delete => _Delete ?? new RelayCommand(_DeleteExcute);
+        private void _DeleteExcute()
+        {
+            if (Selected != null)
+            {
+                Product.Command.Remove(Selected.Id);
+                ProductDataList.Remove(Selected);
+                Selected = ProductDataList.LastOrDefault();
+            }
+        }
+        #endregion
+
+        #region Добавление новых записей
+
+        private ICommand _Add;
+        public ICommand Add => _Add ?? new RelayCommand(AddExcute);
+        private void AddExcute()
+        {
+            var newProduct = Product.Add(Selected);
+            ProductData newProductData = new();
+            Mapper.CopyProperties(newProduct, newProductData);
+            ProductDataList.Add(newProductData);
+        }
+        #endregion
     }
-    public class ProductData: BaseInpc, IProduct
+    public class ProductData: ViewModelBase, IProduct
     {
-        private int _Id;
-        public int Id { get => _Id; set => Set(ref _Id, value); }
+        public int Id { get => Get<int>(); set => Set(value); }
 
-        private string _Name;
-        public string Name { get => _Name; set => Set(ref _Name, value); }
+        public string Name { get => Get<string>(); set => Set(value); }
 
-        private string _Description;
-        public string Description { get => _Description; set => Set(ref _Description, value); }
+        public string Description { get => Get<string>(); set => Set(value); }
     }
 }

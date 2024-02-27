@@ -1,5 +1,4 @@
-﻿using DataBase.Command;
-using DataBase.Entity;
+﻿using DataBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,73 +6,71 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ViewModel.VmHellper;
+using Repositories;
+using System.Windows;
+using WpfCore;
 
 namespace ViewModel
 {
-    public class NavigationVM: BaseInpc
+    public class NavigationVM: ViewModelBase
     {
+        private readonly Authorized Auth;
         public NavigationVM()
         {
-            ProductVMCommand = new RelayCommand(ActionProductVM);
-            PeopleVMCommand = new RelayCommand(ActionPeopleVM);
-            AuthVMClose = AuthVMCloseRun;
-            CommandUser = new CommandUser();
-            User? user = CommandUser.GetUser();
-            if (user == null)
-            {
-                AppearingUserControl = new AuthVM();
-                CommandUser = null!;
-            }
+            CommandUser = new();
+            User? user = CommandUser.Context.User.FirstOrDefault() ?? new User();
+            Auth = new Authorized();
+            Auth.AuthorizedChanged += Authorized_AuthorizedChanged;
+            Auth.Authorize(user.Name);
+
+            if(Auth.IsAuthorized)
+                CurrentMenu = new PersonVM();
             else
-                CurrentMenu = new PeopleVM();
+            AuthVM.Instance.AuthorizeCommand = _AuthorizeCommand;
         }
-        CommandUser CommandUser;
-        /// <summary>
-        /// Делегат для закрытия AppearingUserControl, если понадобится в коде закрыть всплывающее окно.
-        /// </summary>
-        public static Action AuthVMClose = null!;
-        void AuthVMCloseRun() => AppearingUserControl = null!;
-        /// <summary>
-        /// ListCurrentView нужен для хранения состояния UserControl. 
-        /// Все действия над представлением и изменением контента сохраняются в этой коллекции. 
-        /// Если хранить  представление и изменением контента не нужно. Тогда лучше удалить эту коллекцию и связанный с ней метод.
-        /// </summary>
-        private List<object> ListCurrentView = new();
-        private object GetOrAddObject(object obj)
+        #region Авторизация пользователя
+        private void Authorized_AuthorizedChanged(object sender, IsAuthorizedChangedEventArgs e)
         {
-           var control = ListCurrentView.FirstOrDefault(obj);
-            if (control == null)
-            {
-                control = obj;
-                ListCurrentView.Add(obj);
-            }
-            return control;
+            if (AppearingUserControl != null)
+                AppearingUserControl = null!;
+
+            if (e.IsAuthorized)
+                CurrentMenu = new PersonVM();
+            else
+                AppearingUserControl = new AuthVM();
         }
 
+        // Команда для выполнения действия, требующего авторизации
+        private ICommand authorizeCommand;
+
+        public ICommand _AuthorizeCommand => authorizeCommand ??  new RelayCommand(AuthorizeExecute);
+
+        private void AuthorizeExecute(object name) => Auth.Authorize(name.ToString());
+        #endregion
+
+        Command<User> CommandUser;
+
         #region Экземляер для отображения всплывающих окон
-        private object _AppearingUserControl;
-        public object AppearingUserControl { get => _AppearingUserControl; set { Set(ref _AppearingUserControl, value); } }
+        public object AppearingUserControl { get => Get<object>(); set { Set(value); } }
         #endregion
 
         #region Экземляер для отображения страниц меню
-        private object _CurrentMenu;
-        public object CurrentMenu { get => _CurrentMenu; set { Set(ref _CurrentMenu, value); } }
-        #endregion
-
-        //# region AuthVMCommand
-        //private ICommand _AuthVM;
-        //public ICommand AuthVMCommand => _AuthVM = _AuthVM ?? new RelayCommand((object obj) => { AppearingUserControl = new AuthVM(); });
-        //#endregion
-
-        #region PeopleVMCommand
-        private void ActionPeopleVM(object obj) => CurrentMenu = GetOrAddObject(new PeopleVM());
-        public ICommand PeopleVMCommand { get; set; }
+        public object CurrentMenu { get => Get<object>(); set { Set(value); } }
         #endregion
 
         #region PeopleVMCommand
-        private void ActionProductVM(object obj) => CurrentMenu = GetOrAddObject(new ProductVM());
-        public ICommand ProductVMCommand { get; set; }
+        private ICommand _PersonVMCommand;
+        public ICommand PersonVMCommand => _PersonVMCommand = _PersonVMCommand ?? new RelayCommand(() => { CurrentMenu = new PersonVM(); });
+        #endregion
+
+        #region ProductVMCommand
+        private ICommand _ProductVMCommand;
+        public ICommand ProductVMCommand  => _ProductVMCommand = _ProductVMCommand ?? new RelayCommand(() => { CurrentMenu = new ProductVM(); });
+        #endregion
+
+        #region SettingVMCommand
+        private ICommand _SettingVMCommand;
+        public ICommand SettingVMCommand => _SettingVMCommand = _SettingVMCommand ?? new RelayCommand(() => { CurrentMenu = new SettingVM(); });
         #endregion
 
 
