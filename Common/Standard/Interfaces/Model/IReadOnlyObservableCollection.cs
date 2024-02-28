@@ -38,10 +38,10 @@ namespace Common.Standard.Interfaces.Model
         object? IList.this[int index] { get => obslist[index]; set => throw new NotImplementedException(); }
 
         public int Count => obslist.Count;
-        public bool IsFixedSize => list.IsFixedSize;
-        public bool IsReadOnly => list.IsReadOnly;
-        public bool IsSynchronized => list.IsSynchronized;
-        public object SyncRoot => list.SyncRoot;
+        public bool IsFixedSize => true; //list.IsFixedSize;
+        public bool IsReadOnly => true;//list.IsReadOnly;
+        public bool IsSynchronized => collection.IsSynchronized;
+        public object SyncRoot => collection.SyncRoot;
 
         public event NotifyCollectionChangedEventHandler? CollectionChanged
         {
@@ -67,7 +67,7 @@ namespace Common.Standard.Interfaces.Model
 
         public bool Contains(object? value) => list.Contains(value);
 
-        public void CopyTo(Array array, int index) => list.CopyTo(array, index);
+        public void CopyTo(Array array, int index) => collection.CopyTo(array, index);
 
         public IEnumerator<T> GetEnumerator()
         {
