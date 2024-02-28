@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LearnMvvm"
         xmlns:userControls="clr-namespace:LearnMvvm.UserControls"
-        xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
         mc:Ignorable="d"
         Style="{StaticResource CustomWindowStyle}"
         Height="450" Width="800"
@@ -20,7 +19,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <!--Окно регистрации-->
-            <ContentControl d:Visibility="Visible" Content="{Binding AuthVM}" Panel.ZIndex="1" Grid.RowSpan="100" Grid.ColumnSpan="100">
+            <ContentControl d:Visibility="Visible" Content="{Binding AuthVM}" Panel.ZIndex="1" Grid.RowSpan="100" Grid.ColumnSpan="100"
+                            ContentTemplateSelector="{DynamicResource vmSelector}">
                 <ContentControl.Style>
                     <Style TargetType="ContentControl">
                         <Style.Triggers>
@@ -49,7 +49,8 @@
                 </Grid>
             </Border>
             <Grid Grid.Column="1">
-                <ContentControl Content="{Binding CurrentContext, Mode=OneWay}"></ContentControl>
+                <ContentControl Content="{Binding CurrentContext, Mode=OneWay}"
+                            ContentTemplateSelector="{DynamicResource vmSelector}"></ContentControl>
             </Grid>
         </Grid>
     </Border>

@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositorie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{0C04A175-1B3B-438E-A1B6-AFAD253D2DBE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearnMvvmApp", "LearnMvvmApp\LearnMvvmApp.csproj", "{45826A0B-E30F-48DA-8FD2-21085EE04BB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{0C04A175-1B3B-438E-A1B6-AFAD253D2DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C04A175-1B3B-438E-A1B6-AFAD253D2DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C04A175-1B3B-438E-A1B6-AFAD253D2DBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45826A0B-E30F-48DA-8FD2-21085EE04BB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45826A0B-E30F-48DA-8FD2-21085EE04BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45826A0B-E30F-48DA-8FD2-21085EE04BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45826A0B-E30F-48DA-8FD2-21085EE04BB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

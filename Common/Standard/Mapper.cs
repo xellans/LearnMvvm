@@ -2,7 +2,7 @@
 
 namespace Standard
 {
-    public static class Mapper
+    public static partial class Mapper
     {
         /// <summary>
         /// Копирование свойств из одного класса в другой

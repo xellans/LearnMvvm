@@ -1,5 +1,6 @@
 ﻿using Common.Standard.Interfaces.ViewModel;
 using System.ComponentModel;
+using System.Windows;
 using WpfCore;
 
 namespace LearnMvvm
@@ -26,6 +27,24 @@ namespace LearnMvvm
                 obj = AuthVM;
             CurrentContext = obj;
         });
+
+
+
+        public static NavigatorLocator GetNavigator(DependencyObject obj)
+        {
+            return (NavigatorLocator)obj.GetValue(NavigatorProperty);
+        }
+
+        public static void SetNavigator(DependencyObject obj, NavigatorLocator value)
+        {
+            obj.SetValue(NavigatorProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for Navigator.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NavigatorProperty =
+            DependencyProperty.RegisterAttached("Navigator", typeof(NavigatorLocator), typeof(NavigatorLocator), new PropertyMetadata(null));
+
+
     }
 
     // Тестовый класс для режима разработки.

@@ -1,14 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
+                    xmlns:vm="clr-namespace:Common.Standard.Interfaces.ViewModel;assembly=Common"
                     xmlns:local="clr-namespace:LearnMvvm"
                     xmlns:userControls="clr-namespace:LearnMvvm.UserControls"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <DataTemplate DataType="{x:Type vm:AuthVM}">
-        <local:AuthUserControl />
-    </DataTemplate>
+    <local:VmTemplateSelector x:Key="vmSelector">
+        <DataTemplate x:Key="{x:Type vm:IAuthVM}">
+            <local:AuthUserControl />
+        </DataTemplate>
+    </local:VmTemplateSelector>
 
-    <DataTemplate DataType="{x:Type vm:PersonVM}">
+    <!--<DataTemplate DataType="{x:Type vm:PersonVM}">
         <userControls:PeopleInfo />
     </DataTemplate>
 
@@ -18,5 +20,5 @@
 
     <DataTemplate DataType="{x:Type vm:SettingVM}">
         <userControls:SettingUserControl />
-    </DataTemplate>
+    </DataTemplate>-->
 </ResourceDictionary>

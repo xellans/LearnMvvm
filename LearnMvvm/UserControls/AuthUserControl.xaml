@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:LearnMvvm"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
-             DataContext="{Binding AuthVM, Source={StaticResource locator}}">
+             DataContext="{Binding Path=(local:NavigatorLocator.Navigator).AuthVM, RelativeSource={RelativeSource Self}}"
+             local:NavigatorLocator.Navigator="{DynamicResource locator}">
     <UserControl.Resources>
         <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Height" Value="26"/>
