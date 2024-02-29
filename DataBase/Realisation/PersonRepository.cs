@@ -1,4 +1,6 @@
 ﻿using DataBase;
+using DataBase.Interfaces;
+using DataBase.Realisation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Realisation
+namespace DataBase.Realisation
 {
-    public class PersonRepository
+    public class PersonRepository : IPersonRepository
     {
         public Command<Person> Command { get; set; }
 
@@ -16,7 +18,7 @@ namespace Repositories.Realisation
         /// Список людей
         /// </summary>
         /// <returns></returns>
-        public ReadOnlyObservableCollection<Person> PersonCollections;
+        public ReadOnlyObservableCollection<Person> PersonCollections {  get; }
         public PersonRepository()
         {
             Command = new Command<Person>();

@@ -1,5 +1,5 @@
-﻿using DataBase;
-using Repositories.Inerfaces;
+﻿using Common.Standard.Interfaces.Model;
+using DataBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,15 +31,6 @@ namespace Repositories
             }
             IsAuthorized = args.IsAuthorized;
             AuthorizedChanged?.Invoke(this, args);
-        }
-    }
-    public class IsAuthorizedChangedEventArgs : EventArgs
-    {
-        public bool IsAuthorized { get; }
-
-        public IsAuthorizedChangedEventArgs(bool isAuthorized)
-        {
-            IsAuthorized = isAuthorized;
         }
     }
 }

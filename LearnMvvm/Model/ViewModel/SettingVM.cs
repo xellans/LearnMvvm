@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using WpfCore;
 
-namespace ViewModel
+namespace LearnMvvm.Model.ViewModel
 {
     public class SettingVM :ViewModelBase
     {

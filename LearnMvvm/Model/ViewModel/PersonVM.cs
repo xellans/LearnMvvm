@@ -1,22 +1,19 @@
-﻿using DataBase;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Repositories;
-using Repositories.Inerfaces;
 using WpfCore;
-using Repositories.Realisation;
+using Common.Standard.Interfaces.Model;
 
-namespace ViewModel
+namespace LearnMvvm.Model.ViewModel
 {
     public class PersonVM: ViewModelBase
     {
         public PersonVM()
         {
-            Person = new();
+       //     Person = new();
             PersonList = new();
             Load();
 
@@ -24,12 +21,12 @@ namespace ViewModel
         #region Заполнение данными
         private void Load()
         {
-            foreach (var res in Person.PersonCollections)
-                PersonList.Add(new PersonData() { Id = res.Id, Name = res.Name, CompletedTasks = res.CompletedTasks, RemainsExecute = res.RemainsExecute });
+         //   foreach (var res in Person.PersonCollections)
+           //     PersonList.Add(new PersonData() { Id = res.Id, Name = res.Name, CompletedTasks = res.CompletedTasks, RemainsExecute = res.RemainsExecute });
         }
         #endregion
         public ObservableCollection<PersonData> PersonList { get => Get<ObservableCollection<PersonData>>(); set => Set(value); }
-        private  PersonRepository Person;
+     //   private  PersonRepository Person;
     }
     public class PersonData : ViewModelBase, IPerson
     {

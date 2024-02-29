@@ -1,7 +1,7 @@
-﻿using DataBase;
+﻿using Common.Standard.Interfaces.Model;
+using DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
-using Repositories.Inerfaces;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,17 +13,15 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Xml.Linq;
 
-namespace Repositories
+namespace DataBase.Realisation
 {
     public class Command<T> : IRepository<T> where T : class
     {
-        public Context Context; //*Сделал публичным так как реализованы не все функции ef, сейчас они не нужны для реализации. Но можно сделать позже.
-                                //Потом сделаю это свойство приватным*//
+        private readonly Context Context;
         public Command()
         {
             Context = new Context();
             Context.Database.EnsureCreated();
-            Context.Product.Load();
         }
         public void Load() => Context.Set<T>().Load();
         /// <summary>

@@ -4,12 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LearnMvvm.UserControls"
-             xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
+             xmlns:vm="clr-namespace:LearnMvvm.Model.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="434" d:DesignWidth="540" Background="{DynamicResource Brush1}">
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <vm:PersonVM/>
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
     <Grid>
         <DataGrid Margin="1 0 0 0" 
           ItemsSource="{Binding PersonList}">

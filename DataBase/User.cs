@@ -1,8 +1,9 @@
+using Common.Standard.Interfaces.Model;
 using System.Collections.Generic;
 
 namespace DataBase
 {
-    public class User
+    public class User : IUser
     {
         public long Id { get; set; }
         /// <summary>

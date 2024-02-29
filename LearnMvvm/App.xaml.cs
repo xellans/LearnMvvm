@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using LearnMvvm.Model.ViewModel;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 
@@ -9,6 +10,7 @@ namespace LearnMvvm
     /// </summary>
     public partial class App : Application
     {
+       
     }
 
 }

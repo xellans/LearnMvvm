@@ -1,5 +1,7 @@
-﻿using DataBase;
-using Repositories.Inerfaces;
+﻿using Common.Standard.Interfaces.Model;
+using DataBase;
+using DataBase.Interfaces;
+using DataBase.Realisation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,12 +9,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Realisation
+namespace DataBase.Realisation
 {
-    public class ProductRepository
+    public class ProductRepository : IProductRepository
     {
         public Command<Product> Command { get; set; }
-        public ReadOnlyObservableCollection<Product> ProductCollections;
+        public ReadOnlyObservableCollection<Product> ProductCollections { get; }
         public ProductRepository() 
         {
             Command = new Command<Product>();

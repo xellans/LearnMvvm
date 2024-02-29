@@ -1,12 +1,11 @@
-﻿using DataBase;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Inerfaces
+namespace Common.Standard.Interfaces.Model
 {
     public interface IRepository<T>
     {

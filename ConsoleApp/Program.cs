@@ -1,11 +1,12 @@
 ﻿using DataBase;
+using DataBase.Interfaces;
+using DataBase.Realisation;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
-using Repositories.Realisation;
 
 UserRepository User = new UserRepository();
 
-PersonRepository Person = new PersonRepository();
+IPersonRepository Person = new PersonRepository();
 
 
 string info = @"1 - Добавить нового пользователя
