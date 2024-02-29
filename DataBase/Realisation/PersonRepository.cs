@@ -1,4 +1,5 @@
-﻿using DataBase;
+﻿using Common.Standard.Interfaces.Model;
+using DataBase;
 using DataBase.Interfaces;
 using DataBase.Realisation;
 using System;
@@ -18,19 +19,27 @@ namespace DataBase.Realisation
         /// Список людей
         /// </summary>
         /// <returns></returns>
-        public ReadOnlyObservableCollection<Person> PersonCollections {  get; }
+        private IReadOnlyObservableCollection<IPerson>? products;
+        public IReadOnlyObservableCollection<IPerson> PersonCollections()
+        {
+            if (products is null)
+            {
+                var list = Command.ToObservableCollections();
+                products = new ReadOnlyObservableList<IPerson, Person>(list);
+            }
+            return products;
+        }
         public PersonRepository()
         {
             Command = new Command<Person>();
             Command.Load();
-            PersonCollections = Command.ToObservableCollections();
             CreatePerson();
         }
 
         #region Заполнение бд, нужно только для примера.
         public void CreatePerson()
         {
-            if (PersonCollections.Count() > 0)
+            if (PersonCollections().Count() > 0)
                 return;
             string[] peopleArray = { "Алиса", "Екатерина", "Василий", "Андрей", "Пётр", "Инна", "Вика", "Жанна", "Ксюша", "Анатолий" };
             for (int i = 0; i < 200; i++)

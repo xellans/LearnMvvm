@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using Common.Standard.Interfaces.Model;
 
 namespace DataBase.Interfaces
 {
     public interface IPersonRepository
     {
          Command<Person> Command { get; set; }
-         ReadOnlyObservableCollection<Person> PersonCollections {  get; }
-         void CreatePerson();
+        IReadOnlyObservableCollection<IPerson> PersonCollections();
+        void CreatePerson();
     }
 }

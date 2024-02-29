@@ -110,7 +110,7 @@ namespace DataBase.Realisation
                 Context.SaveChanges();
             }
         }
-        public ReadOnlyObservableCollection<T> ToObservableCollections() => new ReadOnlyObservableCollection<T>(Context.Set<T>().Local.ToObservableCollection());
+        public ObservableCollection<T> ToObservableCollections() => new ObservableCollection<T>(Context.Set<T>().Local.ToObservableCollection());
 
         /// <summary>
         /// Сохранить изменения

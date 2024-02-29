@@ -2,6 +2,7 @@
 using DataBase;
 using DataBase.Interfaces;
 using DataBase.Realisation;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,14 +15,26 @@ namespace DataBase.Realisation
     public class ProductRepository : IProductRepository
     {
         public Command<Product> Command { get; set; }
-        public ReadOnlyObservableCollection<Product> ProductCollections { get; }
+        private IReadOnlyObservableCollection<IProduct>? products;
+        public IReadOnlyObservableCollection<IProduct> ProductCollections()
+        {
+            if (products is null)
+            {
+                var list = Command.ToObservableCollections();
+                products = new ReadOnlyObservableList<IProduct, Product>(list);
+            }
+            return products;
+        }
+
         public ProductRepository() 
         {
             Command = new Command<Product>();
             Command.Load();
-            ProductCollections = Command.ToObservableCollections();
             CreateProduct();
         }
+
+
+
         public Product Add(IProduct product)
         {
             Product newProduct = new Product
@@ -35,7 +48,7 @@ namespace DataBase.Realisation
         #region Заполнение бд, нужно только для примера.
         public void CreateProduct()
         {
-            if (ProductCollections.Count > 0)
+            if (ProductCollections().Count() > 0)
                 return;
             for (int i = 0; i < 200; i++)
             {

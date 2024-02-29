@@ -1,4 +1,5 @@
-﻿using DataBase.Realisation;
+﻿using Common.Standard.Interfaces.Model;
+using DataBase.Realisation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ namespace DataBase.Interfaces
     public interface IProductRepository
     {
         Command<Product> Command { get; set; }
-        ReadOnlyObservableCollection<Product> ProductCollections { get; }
+        IReadOnlyObservableCollection<IProduct> ProductCollections();
         void CreateProduct();
     }
 }
