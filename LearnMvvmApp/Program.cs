@@ -26,12 +26,12 @@ namespace LearnMvvmApp
                     // Создание экземпляров и внедрение зависимостей
 
                     Context context = new();
+                    ContextRepositories repositories = new(context);
 
-                    PeopleRepository peopleRepository = new(context);
-                    ProdustsRepository produstsRepository = new(context);
+
                     Authorized authorized = new(context);
 
-                    MainModel mainModel = new MainModel(authorized, produstsRepository, peopleRepository);
+                    MainModel mainModel = new MainModel(authorized, repositories.Products, repositories.People);
 
                     AuthVM authVM = new(mainModel.Authorized);
 

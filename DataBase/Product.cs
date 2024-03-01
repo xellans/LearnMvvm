@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace DataBase
 {
-    internal class Product : IProduct
+    public class Product : IProduct
     {
         private string _name = string.Empty;
         private string _description = string.Empty;
 
-        public int Id { get; internal set; }
+        public long Id { get; internal set; }
         public string Name { get => _name; internal set => _name = value ?? string.Empty; }
         public string Description { get => _description; internal set => _description = value ?? string.Empty; }
     }

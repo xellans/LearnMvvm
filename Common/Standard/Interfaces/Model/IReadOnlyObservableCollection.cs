@@ -17,15 +17,14 @@ namespace Common.Standard.Interfaces.Model
         INotifyPropertyChanged
     { }
 
-    public class ReadOnlyObservableList<T, Tsource> : IReadOnlyObservableCollection<T>
-        where T : class
-        where Tsource : T
+    public class ReadOnlyObservableList<T, TSource> : IReadOnlyObservableCollection<T>
+        where TSource : T
     {
-        private readonly ObservableCollection<Tsource> obslist;
+        private readonly ObservableCollection<TSource> obslist;
         private readonly IList list;
         private readonly ICollection collection;
         private readonly INotifyPropertyChanged notifyyPropertyChanged;
-        public ReadOnlyObservableList(ObservableCollection<Tsource> list)
+        public ReadOnlyObservableList(ObservableCollection<TSource> list)
         {
             ArgumentNullException.ThrowIfNull(list);
             obslist = list;
@@ -71,7 +70,7 @@ namespace Common.Standard.Interfaces.Model
 
         public IEnumerator<T> GetEnumerator()
         {
-            foreach (Tsource item in obslist)
+            foreach (TSource item in obslist)
             {
                 yield return item;
             }

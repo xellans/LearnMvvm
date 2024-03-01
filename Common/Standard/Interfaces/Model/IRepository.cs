@@ -10,7 +10,7 @@ namespace Common.Standard.Interfaces.Model
         T? FirstOrDefault(Expression<Func<T, bool>> expression);
         IQueryable<T> Where(Expression<Func<T, bool>> expression);
 
-        bool Any(Func<T, bool> predicate);
+        bool Any(Expression<Func<T, bool>> expression);
         void Remove(T t);
         void Remove(int Id);
         T Update(T t);
