@@ -22,7 +22,7 @@ namespace Repositories
         {
             if (ProductCollections.Count() > 0)
                 return;
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 10; i++)
             {
                 Product product = new Product()
                 {

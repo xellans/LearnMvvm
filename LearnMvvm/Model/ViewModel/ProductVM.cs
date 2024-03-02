@@ -43,6 +43,9 @@ namespace LearnMvvm.Model.ViewModel
                 int index  = ProductDataList.IndexOf(Selected);
                 Repository.Product.Remove(Selected);
                 ProductDataList.Remove(Selected);
+                if (index == ProductDataList.Count())
+                    index--;
+                if(index >= 0)
                 Selected = ProductDataList.Get(index);
             }
         }
@@ -54,8 +57,7 @@ namespace LearnMvvm.Model.ViewModel
         public ICommand Add => _Add ?? new RelayCommand(AddExcute);
         private void AddExcute()
         {
-            var newProduct = Repository.Product.Add(Selected);
-            ProductDataList.Add(newProduct);
+          Repository.Product.Add(Selected);
         }
         #endregion
     }

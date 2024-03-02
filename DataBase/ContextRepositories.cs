@@ -7,15 +7,12 @@ namespace DataBase
     {
         public static Product ItToT(IProduct iproduct)
         {
-            if (iproduct is not Product product)
+            Product product = new()
             {
-                product = new()
-                {
-                    Id = iproduct.Id,
-                    Name = iproduct.Name,
-                    Description = iproduct.Description
-                };
-            }
+                Id = iproduct.Id,
+                Description = iproduct.Description,
+                Name = iproduct.Name
+            };
             return product;
         }
 
