@@ -34,6 +34,7 @@ namespace Common.EntityFrameworkCore
             context.SaveChanges();
             return result.Entity;
         }
+        public IT? NewT() => Activator.CreateInstance<T>();
 
         public bool Any(Expression<Func<IT, bool>> expression)
         {
@@ -89,18 +90,6 @@ namespace Common.EntityFrameworkCore
             context.SaveChanges();
             return it;
         }
-
-        public IT Update(object NewValue, int id)
-        {
-            var t = set.Find(id) ?? throw notId;
-
-            var entity = context.Entry(t);
-            entity.CurrentValues.SetValues(NewValue);
-            context.SaveChanges();
-
-            return entity.Entity;
-        }
-
         public IQueryable<IT> Where(Expression<Func<IT, bool>> expression)
         {
             return set.Where(expression);

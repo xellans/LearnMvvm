@@ -14,6 +14,7 @@ namespace LearnMvvm.Model.ViewModel
         {
             Repository = new();
             ProductDataList = Repository.ProductCollections;
+            Selected = Repository.Product.NewT();
         }
         public IReadOnlyObservableCollection<IProduct> ProductDataList { get => Get<IReadOnlyObservableCollection<IProduct>>(); set => Set(value); }
 
@@ -46,7 +47,7 @@ namespace LearnMvvm.Model.ViewModel
                 if (index == ProductDataList.Count())
                     index--;
                 if(index >= 0)
-                Selected = ProductDataList.Get(index);
+                Selected = ProductDataList[index];
             }
         }
         #endregion
@@ -57,7 +58,8 @@ namespace LearnMvvm.Model.ViewModel
         public ICommand Add => _Add ?? new RelayCommand(AddExcute);
         private void AddExcute()
         {
-          Repository.Product.Add(Selected);
+            if (Selected != null)
+                Repository.Product.Add(Selected);
         }
         #endregion
     }

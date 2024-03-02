@@ -12,12 +12,13 @@ namespace Common.Standard.Interfaces.Model
         IEnumerable,
         IReadOnlyCollection<T>,
         IReadOnlyList<T>,
-        ICollection,
-        IList,
+     //   ICollection,
+       // IList,
         INotifyCollectionChanged,
         INotifyPropertyChanged
     {
-        T Get(int index);
+        int IndexOf(object? value);
+        void Remove(object? value);
     }
 
     public class ReadOnlyObservableList<T, Tsource> : IReadOnlyObservableCollection<T>
@@ -38,11 +39,9 @@ namespace Common.Standard.Interfaces.Model
         }
 
         public T this[int index] => obslist[index];
-        object? IList.this[int index] { get => ((IReadOnlyList<T>)obslist)[index]; set => throw new NotImplementedException(); }
-        public T Get(int index)
-        {
-            return obslist[index];
-        }
+        //    object? IList.this[int index] { get => ((IReadOnlyList<T>)obslist)[index]; set => throw new NotImplementedException(); }
+        public int IndexOf(object? value) => list.IndexOf(value);
+
 
         public int Count => obslist.Count;
         public bool IsFixedSize => true; //list.IsFixedSize;
@@ -85,7 +84,6 @@ namespace Common.Standard.Interfaces.Model
             }
         }
 
-        public int IndexOf(object? value) => list.IndexOf(value);
 
         public void Insert(int index, object? value)
         {

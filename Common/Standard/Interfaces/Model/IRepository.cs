@@ -14,8 +14,8 @@ namespace Common.Standard.Interfaces.Model
         void Remove(T t);
         void Remove(int Id);
         T Update(T t);
-        T Update(object NewValue, int Id);
         T? Add(T t);
+        T? NewT();
         IReadOnlyObservableCollection<T> ToObservableCollections();
     }
 }
