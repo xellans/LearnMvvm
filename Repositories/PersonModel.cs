@@ -1,20 +1,38 @@
-﻿using Common.WpfCore;
-using DataBase.Interfaces;
-using DataBase.Realisation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Common.Standard.Interfaces.Model;
+using DataBase;
 
 namespace Repositories
 {
     public class PersonModel
     {
-        public IPersonRepository Person { get; set; }
+        public IRepository<IPerson> Repository { get; set; }
+        public IReadOnlyObservableCollection<IPerson> PersonCollections;
+
         public PersonModel() 
         {
-            Person = new PersonRepository();
+            Context context = new();
+            ContextRepositories repositories = new(context);
+            Repository = repositories.Person;
+            PersonCollections = Repository.ToObservableCollections();
+            CreatePerson();
         }
+        #region Заполнение бд, нужно только для примера.
+        public void CreatePerson()
+        {
+            if (PersonCollections.Count() > 0)
+                return;
+            string[] peopleArray = { "Алиса", "Екатерина", "Василий", "Андрей", "Пётр", "Инна", "Вика", "Жанна", "Ксюша", "Анатолий" };
+            for (int i = 0; i < 200; i++)
+            {
+                Person people = new Person()
+                {
+                    Name = peopleArray[Random.Shared.Next(0, 9)],
+                    CompletedTasks = Random.Shared.Next(10, 1000),
+                    RemainsExecute = Random.Shared.Next(10, 1000)
+                };
+                Repository.Add(people);
+            }
+        }
+        #endregion
     }
 }

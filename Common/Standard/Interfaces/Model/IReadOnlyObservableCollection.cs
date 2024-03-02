@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace Common.Standard.Interfaces.Model
 {
@@ -15,10 +16,12 @@ namespace Common.Standard.Interfaces.Model
         IList,
         INotifyCollectionChanged,
         INotifyPropertyChanged
-    { }
+    {
+        T Get(int index);
+    }
 
     public class ReadOnlyObservableList<T, Tsource> : IReadOnlyObservableCollection<T>
-        where T : class
+      //  where T : class
         where Tsource : T
     {
         private readonly ObservableCollection<Tsource> obslist;
@@ -35,7 +38,11 @@ namespace Common.Standard.Interfaces.Model
         }
 
         public T this[int index] => obslist[index];
-        object? IList.this[int index] { get => obslist[index]; set => throw new NotImplementedException(); }
+        object? IList.this[int index] { get => ((IReadOnlyList<T>)obslist)[index]; set => throw new NotImplementedException(); }
+        public T Get(int index)
+        {
+            return obslist[index];
+        }
 
         public int Count => obslist.Count;
         public bool IsFixedSize => true; //list.IsFixedSize;
@@ -57,7 +64,8 @@ namespace Common.Standard.Interfaces.Model
 
         public int Add(object? value)
         {
-            throw new NotImplementedException();
+            list.Add(value);
+            return obslist.Count;
         }
 
         public void Clear()
@@ -67,7 +75,7 @@ namespace Common.Standard.Interfaces.Model
 
         public bool Contains(object? value) => list.Contains(value);
 
-        public void CopyTo(Array array, int index) => collection.CopyTo(array, index);
+         public void CopyTo(Array array, int index) => collection.CopyTo(array, index);
 
         public IEnumerator<T> GetEnumerator()
         {
@@ -84,10 +92,7 @@ namespace Common.Standard.Interfaces.Model
             throw new NotImplementedException();
         }
 
-        public void Remove(object? value)
-        {
-            throw new NotImplementedException();
-        }
+        public void Remove(object? value) => list.Remove(value);
 
         public void RemoveAt(int index)
         {

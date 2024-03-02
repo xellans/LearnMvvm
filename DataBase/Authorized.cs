@@ -5,12 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Repositories
 {
     public class Authorized: IAuthorized
     {
-        public Authorized() =>  Context = new();
+        public Authorized() 
+        {
+            Context = new();
+            Context.Database.EnsureCreated();
+            User? old = Context.User.FirstOrDefault();
+            if (old != null)
+                IsAuthorized = old.IsAuthorized;
+        }
         private Context Context;
 
         public bool IsAuthorized { get; private set; }

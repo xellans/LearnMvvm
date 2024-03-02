@@ -1,41 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WpfCore;
+﻿using WpfCore;
 using Common.Standard.Interfaces.Model;
+using Common.Standard.Interfaces.ViewModel;
+using Repositories;
 
 namespace LearnMvvm.Model.ViewModel
 {
-    public class PersonVM: ViewModelBase
+    public class PersonVM: ViewModelBase, IPersonVM
     {
         public PersonVM()
         {
-       //     Person = new();
-            PersonList = new();
-            Load();
-
+            Repository = new PersonModel();
+            PersonList = Repository.PersonCollections;
         }
-        #region Заполнение данными
-        private void Load()
-        {
-         //   foreach (var res in Person.PersonCollections)
-           //     PersonList.Add(new PersonData() { Id = res.Id, Name = res.Name, CompletedTasks = res.CompletedTasks, RemainsExecute = res.RemainsExecute });
-        }
-        #endregion
-        public ObservableCollection<PersonData> PersonList { get => Get<ObservableCollection<PersonData>>(); set => Set(value); }
-     //   private  PersonRepository Person;
-    }
-    public class PersonData : ViewModelBase, IPerson
-    {
-        public long Id { get => Get<long>(); set => Set(value); }
-
-        public string Name { get => Get<string>(); set => Set(value); }
-
-        public int CompletedTasks { get => Get<int>(); set => Set(value); }
-
-        public int RemainsExecute { get => Get<int>(); set => Set(value); }
+        public IReadOnlyObservableCollection<IPerson> PersonList { get => Get<IReadOnlyObservableCollection<IPerson>>(); set => Set(value); }
+        public PersonModel Repository;
     }
 }

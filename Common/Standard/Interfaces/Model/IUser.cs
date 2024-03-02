@@ -1,6 +1,6 @@
 ﻿namespace Common.Standard.Interfaces.Model
 {
-    public interface IUser
+    public interface IUser : IId
     {
         public long Id { get; set; }
         /// <summary>

@@ -7,9 +7,6 @@
              xmlns:vm="clr-namespace:LearnMvvm.Model.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="434" d:DesignWidth="540" Background="{DynamicResource Brush1}">
-    <!--<UserControl.DataContext>
-        <vm:PersonVM/>
-    </UserControl.DataContext>-->
     <Grid>
         <DataGrid Margin="1 0 0 0" 
           ItemsSource="{Binding PersonList}">

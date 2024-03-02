@@ -1,50 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Microsoft.EntityFrameworkCore;
-using System.Windows.Controls.Primitives;
-using System.Collections.Specialized;
 using WpfCore;
-using System.Security.Cryptography;
-using Common.WpfCore;
 using Common.Standard.Interfaces.Model;
+using Common.Standard.Interfaces.ViewModel;
+using Repositories;
+using Common.EntityFrameworkCore;
 
 namespace LearnMvvm.Model.ViewModel
 {
-    public class ProductVM: ViewModelBase
+    public class ProductVM: ViewModelBase, IProductVM
     {
         public ProductVM()
         {
-        //    Product = new();
-            ProductDataList = new();
-            Load();
-            Selected = new ProductData();
+            Repository = new();
+            ProductDataList = Repository.ProductCollections;
         }
-        #region Заполнение данными
-        private void Load()
-        {
-         //   foreach (var res in Product.ProductCollections)
-           //     ProductDataList.Add(new ProductData() { Id = res.Id, Name = res.Name, Description = res.Description });
-        }
-        #endregion
+        public IReadOnlyObservableCollection<IProduct> ProductDataList { get => Get<IReadOnlyObservableCollection<IProduct>>(); set => Set(value); }
 
-         public ObservableCollection<ProductData> ProductDataList { get => Get<ObservableCollection<ProductData>>(); set => Set(value); }
 
-    //    private ProductRepository  Product { get; set; }
+        private ProductModel Repository { get; set; }
 
-        public ProductData Selected { get => Get<ProductData>(); set => Set(value); }
+        public IProduct Selected { get => Get<IProduct>(); set => Set(value); }
         #region Сохранение изменений
 
         private ICommand _SaveEdit;
         public ICommand SaveEdit => _SaveEdit ??  new RelayCommand(SaveEditExcute);
         private void SaveEditExcute()
         {
-            //if (Selected != null)
-             //   Product.Command.Update(Selected, Selected.Id);
+            if (Selected != null)
+                Repository.Product.Update(Selected);
         }
         #endregion
 
@@ -56,9 +40,10 @@ namespace LearnMvvm.Model.ViewModel
         {
             if (Selected != null)
             {
-             //   Product.Command.Remove(Selected.Id);
+                int index  = ProductDataList.IndexOf(Selected);
+                Repository.Product.Remove(Selected);
                 ProductDataList.Remove(Selected);
-                Selected = ProductDataList.LastOrDefault();
+                Selected = ProductDataList.Get(index);
             }
         }
         #endregion
@@ -69,19 +54,9 @@ namespace LearnMvvm.Model.ViewModel
         public ICommand Add => _Add ?? new RelayCommand(AddExcute);
         private void AddExcute()
         {
-         //   var newProduct = Product.Add(Selected);
-            ProductData newProductData = new();
-       //     Mapper.CopyProperties(newProduct, newProductData);
-            ProductDataList.Add(newProductData);
+            var newProduct = Repository.Product.Add(Selected);
+            ProductDataList.Add(newProduct);
         }
         #endregion
-    }
-    public class ProductData: ViewModelBase, IProduct
-    {
-        public int Id { get => Get<int>(); set => Set(value); }
-
-        public string Name { get => Get<string>(); set => Set(value); }
-
-        public string Description { get => Get<string>(); set => Set(value); }
     }
 }

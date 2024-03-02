@@ -1,23 +1,23 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:vm="clr-namespace:LearnMvvm.Model.ViewModel"
+                    xmlns:vm="clr-namespace:Common.Standard.Interfaces.ViewModel;assembly=Common"
                     xmlns:local="clr-namespace:LearnMvvm"
                     xmlns:userControls="clr-namespace:LearnMvvm.UserControls"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <local:VmTemplateSelector x:Key="vmSelector">
-        <DataTemplate x:Key="{x:Type vm:AuthVM}">
+        <DataTemplate x:Key="{x:Type vm:IAuthVM}">
             <local:AuthUserControl />
         </DataTemplate>
 
-        <!--<DataTemplate x:Key="{x:Type vm:PersonVM}">
+        <DataTemplate x:Key="{x:Type vm:IPersonVM}">
             <userControls:PeopleInfo />
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type vm:ProductVM}">
+        <DataTemplate x:Key="{x:Type vm:IProductVM}">
             <userControls:ProductUserControl />
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type vm:SettingVM}">
+        <!--<DataTemplate DataType="{x:Type vm:SettingVM}">
             <userControls:SettingUserControl />
         </DataTemplate>-->
     </local:VmTemplateSelector>

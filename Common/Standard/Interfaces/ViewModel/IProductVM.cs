@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace Common.Standard.Interfaces.ViewModel
 {
-    public interface IPersonVM
+    public interface IProductVM
     {
-        public IReadOnlyObservableCollection<IPerson> PersonList { get; set; }
+        IReadOnlyObservableCollection<IProduct> ProductDataList { get; set; }
+
     }
 }

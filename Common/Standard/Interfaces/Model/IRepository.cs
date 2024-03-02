@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 namespace Common.Standard.Interfaces.Model
 {
@@ -12,16 +7,15 @@ namespace Common.Standard.Interfaces.Model
         void Load();
         T? FirstOrDefault();
 
-        T? FirstOrDefault(Func<T, bool> predicate);
-        IEnumerable<T> Where(Func<T, bool> predicate);
+        T? FirstOrDefault(Expression<Func<T, bool>> expression);
+        IQueryable<T> Where(Expression<Func<T, bool>> expression);
 
-        bool Any(Func<T, bool> predicate);
+        bool Any(Expression<Func<T, bool>> expression);
         void Remove(T t);
         void Remove(int Id);
-        void Update(T t);
-        void Update(object NewValue, int Id);
-        T? Clone(T t);
+        T Update(T t);
+        T Update(object NewValue, int Id);
         T? Add(T t);
-        ReadOnlyObservableCollection<T> ToObservableCollections();
+        IReadOnlyObservableCollection<T> ToObservableCollections();
     }
 }

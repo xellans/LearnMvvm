@@ -9,7 +9,7 @@ namespace DataBase
         /// <summary>
         /// Имя пользователя
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
         /// <summary>
         /// Возвращает true если пользователь авторизирован
         /// </summary>

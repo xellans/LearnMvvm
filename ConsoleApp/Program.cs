@@ -1,12 +1,10 @@
 ﻿using DataBase;
-using DataBase.Interfaces;
-using DataBase.Realisation;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 
-UserRepository User = new UserRepository();
+//UserRepository User = new UserRepository();
 
-IPersonRepository Person = new PersonRepository();
+//IPersonRepository Person = new PersonRepository();
 
 
 string info = @"1 - Добавить нового пользователя
@@ -26,15 +24,15 @@ Console.WriteLine(info);
         ExistUser();
         break;
     case "3":
-        Person.CreatePerson();
+       // Person.CreatePerson();
         Console.WriteLine("Люди были добавлены в базу");
         break;
     case "4":
-        var array = Person.PersonCollections;
+     //   var array = Person.PersonCollections;
         // Выводим весь список людей
-        foreach (var person in array)
+      //  foreach (var person in array)
         {
-            Console.WriteLine($"Id: {person.Id}, Name: {person.Name}, CompletedTasks: {person.CompletedTasks}, RemainsExecute: {person.RemainsExecute}");
+        //    Console.WriteLine($"Id: {person.Id}, Name: {person.Name}, CompletedTasks: {person.CompletedTasks}, RemainsExecute: {person.RemainsExecute}");
         }
         break;
 }
@@ -49,8 +47,8 @@ void AddUser()
     {
         User _user = new User();
         _user.Name = text;
-        if(User.Command.Any(x => x.Name == _user.Name));
-        User.Command.Add(_user);
+     //   if(User.Command.Any(x => x.Name == _user.Name));
+       // User.Command.Add(_user);
         Console.WriteLine($"Пользователь {text} был добавлен");
     }
     else
@@ -64,10 +62,10 @@ void ExistUser()
     {
         var _user = new User();
         _user.Name = text;
-        var exist = User.Command.Any(x => x.Name == _user.Name);
-        if(exist)
+      //  var exist = User.Command.Any(x => x.Name == _user.Name);
+       // if(exist)
         Console.WriteLine($"Пользователь {text} есть в бд");
-        else
+      //  else
             Console.WriteLine($"Пользователя {text} нет в бд");
     }
     else

@@ -1,6 +1,4 @@
 ﻿using Common.Standard.Interfaces.ViewModel;
-using DataBase.Realisation;
-using DataBase;
 using Repositories;
 using System.ComponentModel;
 using System.Windows;
@@ -12,9 +10,11 @@ namespace LearnMvvm.Model.ViewModel
     // Это классы уровня View
     public class NavigatorLocator : ViewModelBase
     {
-        public static bool IsInDesignMode { get; } = DesignerProperties.GetIsInDesignMode(new());
         public IAuthVM? AuthVM { get => Get<IAuthVM>(); set => Set(value); }
+        
         public IPersonVM? PersonVM { get => Get<IPersonVM>(); set => Set(value); }
+
+        public IProductVM? ProductVM { get => Get<IProductVM>(); set => Set(value); }
 
 
         public NavigatorLocator()
@@ -27,13 +27,16 @@ namespace LearnMvvm.Model.ViewModel
 
         public RelayCommand SetCurrentContext => GetCommand<object?>(obj =>
         {
-            if (nameof(AuthVM).Equals(obj))
-                obj = AuthVM;
-
             if (nameof(PersonVM).Equals(obj))
             {
-                //PersonVM = new PersonVM();
+                PersonVM = new PersonVM();
                 obj = PersonVM;
+            }
+
+            if (nameof(ProductVM).Equals(obj))
+            {
+                ProductVM = new ProductVM();
+                obj = ProductVM;
             }
 
             CurrentContext = obj;
@@ -56,14 +59,5 @@ namespace LearnMvvm.Model.ViewModel
             DependencyProperty.RegisterAttached("Navigator", typeof(NavigatorLocator), typeof(NavigatorLocator), new PropertyMetadata(null));
 
 
-    }
-
-    // Тестовый класс для режима разработки.
-    internal class AuthVMDesignMode : IAuthVM
-    {
-        public RelayCommand AuthorizeCommand { get; } = new RelayCommand(() => { });
-        public long Id { get; set; } = 12344;
-        public bool IsAuthorized { get; } = false;
-        public string? Name { get; set; } = "Абра Катабра";
     }
 }

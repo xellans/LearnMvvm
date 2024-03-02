@@ -7,9 +7,6 @@
              mc:Ignorable="d" 
              xmlns:vm="clr-namespace:LearnMvvm.Model.ViewModel"
              d:DesignHeight="434" d:DesignWidth="540" Background="{DynamicResource Brush1}">
-    <UserControl.DataContext>
-        <vm:ProductVM/>
-    </UserControl.DataContext>
     <Grid x:Name="Grids">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.7*"/>
