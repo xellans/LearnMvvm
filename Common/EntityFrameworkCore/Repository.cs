@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace DataBase
+namespace Common.EntityFrameworkCore
 {
     public class Repository<IT, T> : IRepository<IT>
         where IT : IId

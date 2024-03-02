@@ -1,4 +1,5 @@
-﻿using Common.Standard.Interfaces.Model;
+﻿using Common.EntityFrameworkCore;
+using Common.Standard.Interfaces.Model;
 
 namespace DataBase
 {
