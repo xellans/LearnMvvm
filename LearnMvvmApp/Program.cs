@@ -32,6 +32,8 @@ namespace LearnMvvmApp
                     //Authorized authorized = new(context);
                     Authorized.Implementation authorized = new("users.json");
 
+                    app.Exit += delegate { authorized.Dispose(); };
+
                     MainModel mainModel = new MainModel(authorized, repositories.Products, repositories.People);
 
                     AuthVM authVM = new(mainModel.Authorized);

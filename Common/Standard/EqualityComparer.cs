@@ -23,6 +23,6 @@ namespace Standard
         public override int GetHashCode([DisallowNull] T obj) => getHashCode(obj);
 
         public static EqualityComparer<T> Create(Func<T, T, bool> equals, Func<T, int>? getHashCode = default)
-            => new EqualityComparer<T>(equals, getHashCode);
+            => new(equals, getHashCode);
     }
 }
