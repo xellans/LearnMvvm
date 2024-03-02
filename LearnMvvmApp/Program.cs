@@ -29,7 +29,8 @@ namespace LearnMvvmApp
                     ContextRepositories repositories = new(context);
 
 
-                    Authorized authorized = new(context);
+                    //Authorized authorized = new(context);
+                    Authorized.Implementation authorized = new("users.json");
 
                     MainModel mainModel = new MainModel(authorized, repositories.Products, repositories.People);
 

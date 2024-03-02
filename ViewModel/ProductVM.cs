@@ -68,7 +68,7 @@ namespace ViewModel
     }
     public class ProductData: ViewModelBase, IProduct
     {
-        public int Id { get => Get<int>(); set => Set(value); }
+        public long Id { get => Get<long>(); set => Set(value); }
 
         public string Name { get => Get<string>(); set => Set(value); }
 
