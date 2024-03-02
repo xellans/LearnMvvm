@@ -1,6 +1,7 @@
 ﻿using Common.Standard.Interfaces.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataBase
 {
+    [Table("Products")]
     public class Product : IProduct
     {
         private string _name = string.Empty;

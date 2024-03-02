@@ -1,36 +1,38 @@
 ﻿using Common.Standard.Interfaces.Model;
-using System.Collections.ObjectModel;
+using Common.Standard.Interfaces.ViewModel;
 using System.Windows.Input;
 using WpfCore;
 
 namespace ViewModel
 {
-    public class ProductVM: ViewModelBase
+    public class ProductVM : ViewModelBase, IProductVM
     {
-        public ProductVM()
+        public ProductVM(IRepository<IProduct> products)
         {
             //Product = new();
-            ProductDataList = new();
-            Load();
-            Selected = new ProductData();
+            this.products = products;
+            ProductDataList = products.ToObservableCollections();
+            products.Load();
+            if (ProductDataList.Count > 0)
+                Selected = ProductDataList[0];
         }
-        #region Заполнение данными
-        private void Load()
-        {
-            //foreach (var res in Product.ProductCollections)
-            //    ProductDataList.Add(new ProductData() { Id = res.Id, Name = res.Name, Description = res.Description });
-        }
-        #endregion
+        //#region Заполнение данными
+        //private void Load()
+        //{
+        //    foreach (var res in Product.ProductCollections)
+        //        ProductDataList.Add(new ProductData() { Id = res.Id, Name = res.Name, Description = res.Description });
+        //}
+        //#endregion
 
-         public ObservableCollection<ProductData> ProductDataList { get => Get<ObservableCollection<ProductData>>(); set => Set(value); }
+        public IReadOnlyObservableCollection<IProduct> ProductDataList { get; }
 
         private readonly IRepository<IProduct> products;
 
-        public ProductData Selected { get => Get<ProductData>(); set => Set(value); }
+        public IProduct? Selected { get => Get<IProduct>(); set => Set(value); }
         #region Сохранение изменений
 
-        private ICommand _SaveEdit;
-        public ICommand SaveEdit => _SaveEdit ??  new RelayCommand(SaveEditExcute);
+        //private ICommand _SaveEdit;
+        public ICommand SaveEdit => GetCommand(SaveEditExcute);
         private void SaveEditExcute()
         {
             //if (Selected != null)
@@ -40,23 +42,34 @@ namespace ViewModel
 
         #region Удаление записей
 
-        private ICommand _Delete;
-        public ICommand Delete => _Delete ?? new RelayCommand(_DeleteExcute);
+        //private ICommand _Delete;
+        public ICommand Delete => GetCommand(_DeleteExcute);
+
         private void _DeleteExcute()
         {
             if (Selected != null)
             {
+                int index = ProductDataList.TakeWhile(pr => pr == Selected).Count();
                 //Product.Command.Remove(Selected.Id);
-                ProductDataList.Remove(Selected);
-                Selected = ProductDataList.LastOrDefault();
+                //ProductDataList.Remove(Selected);
+                products.Remove(Selected);
+                if (ProductDataList.Count > 0)
+                {
+                    if (index >= ProductDataList.Count)
+                    {
+                        index = ProductDataList.Count - 1;
+                    }
+                    Selected = ProductDataList[index];
+                }
+                Selected = null;
             }
         }
         #endregion
 
         #region Добавление новых записей
 
-        private ICommand _Add;
-        public ICommand Add => _Add ?? new RelayCommand(AddExcute);
+        //private ICommand _Add;
+        public ICommand Add => GetCommand(AddExcute);
         private void AddExcute()
         {
             //var newProduct = Product.Add(Selected);
@@ -66,12 +79,12 @@ namespace ViewModel
         }
         #endregion
     }
-    public class ProductData: ViewModelBase, IProduct
-    {
-        public long Id { get => Get<long>(); set => Set(value); }
+    //public class ProductData: ViewModelBase, IProduct
+    //{
+    //    public long Id { get => Get<long>(); set => Set(value); }
 
-        public string Name { get => Get<string>(); set => Set(value); }
+    //    public string Name { get => Get<string>(); set => Set(value); }
 
-        public string Description { get => Get<string>(); set => Set(value); }
-    }
+    //    public string Description { get => Get<string>(); set => Set(value); }
+    //}
 }

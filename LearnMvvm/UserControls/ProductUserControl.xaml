@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LearnMvvm.UserControls"
+             xmlns:model="clr-namespace:Common.Standard.Interfaces.Model;assembly=Common"
              mc:Ignorable="d" 
-             d:DesignHeight="434" d:DesignWidth="540" Background="{DynamicResource Brush1}">
-             <!--xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
+             d:DesignHeight="434" d:DesignWidth="540" Background="{DynamicResource Brush1}"
+             d:DataContext="{Binding ProductVM, Source={StaticResource locator}}">
+    <!--xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
     <UserControl.DataContext>
         <vm:ProductVM/>
     </UserControl.DataContext>-->
@@ -23,6 +25,7 @@
             <Button Margin="10 5 10 0" Content="{DynamicResource Lang9}" Command="{Binding SaveEdit}"></Button>
             <Button Margin="10 5 10 0" Content="{DynamicResource Lang10}" Command="{Binding Add}"></Button>
             <Button Margin="10 5 10 0" Content="{DynamicResource Lang11}" Command="{Binding Delete}"></Button>
+            <TextBlock Text="{Binding ProductDataList}"/>
         </StackPanel>
         <ListBox x:Name="LbProduct"
                  Grid.Column="1" 
@@ -30,7 +33,7 @@
                  ItemsSource="{Binding ProductDataList}"
                  SelectedItem="{Binding Selected}">
             <ListBox.ItemTemplate>
-                <DataTemplate DataType="ListBox">
+                <DataTemplate DataType="{x:Type model:IProduct}">
                     <StackPanel>
                         <TextBlock Text="{Binding Name}"></TextBlock>
                         <TextBlock Margin="0 4 0 0" Text="{Binding Description}"></TextBlock>

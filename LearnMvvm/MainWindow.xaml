@@ -43,8 +43,8 @@
                     <TextBlock FontSize="26" FontFamily="Yu Gothic" Foreground="#6880AA" Margin="10 0 0 0" FontStyle="Italic">Exemple project</TextBlock>
                     <StackPanel Grid.Row="1">
                         <RadioButton Command="{Binding SetCurrentContext}" Content="{DynamicResource Lang1}" CommandParameter="AuthVM"></RadioButton>
-                        <RadioButton Command="{Binding SetCurrentContext}" Content="{DynamicResource Lang2}"></RadioButton>
-                        <RadioButton Command="{Binding SetCurrentContext}" Content="{DynamicResource Lang3}"></RadioButton>
+                        <RadioButton Command="{Binding SetCurrentContext}" Content="{DynamicResource Lang2}" CommandParameter="PersonVM"></RadioButton>
+                        <RadioButton Command="{Binding SetCurrentContext}" Content="{DynamicResource Lang3}" CommandParameter="ProductVM"></RadioButton>
                     </StackPanel>
                 </Grid>
             </Border>

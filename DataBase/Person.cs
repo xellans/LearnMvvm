@@ -1,7 +1,9 @@
 ﻿using Common.Standard.Interfaces.Model;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataBase
 {
+    [Table("People")]
     public class Person : IPerson
     {
         private string _name = string.Empty;

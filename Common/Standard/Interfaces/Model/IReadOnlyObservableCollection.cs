@@ -11,11 +11,15 @@ namespace Common.Standard.Interfaces.Model
         IEnumerable,
         IReadOnlyCollection<T>,
         IReadOnlyList<T>,
-        ICollection,
-        IList,
+        //ICollection,
+        //IList,
         INotifyCollectionChanged,
         INotifyPropertyChanged
-    { }
+    {
+        //new int Count { get; }
+        //new T this[int index] { get; }
+
+    }
 
     public class ReadOnlyObservableList<T, TSource> : IReadOnlyObservableCollection<T>
         where TSource : T
@@ -34,7 +38,7 @@ namespace Common.Standard.Interfaces.Model
         }
 
         public T this[int index] => obslist[index];
-        object? IList.this[int index] { get => obslist[index]; set => throw new NotImplementedException(); }
+        //object? IList.this[int index] { get => obslist[index]; set => throw new NotImplementedException(); }
 
         public int Count => obslist.Count;
         public bool IsFixedSize => true; //list.IsFixedSize;

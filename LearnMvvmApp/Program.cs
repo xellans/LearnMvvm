@@ -26,6 +26,7 @@ namespace LearnMvvmApp
                     // Создание экземпляров и внедрение зависимостей
 
                     Context context = new();
+                    context.Database.EnsureCreated();
                     ContextRepositories repositories = new(context);
 
 
@@ -39,6 +40,12 @@ namespace LearnMvvmApp
                     AuthVM authVM = new(mainModel.Authorized);
 
                     locator.AuthVM = authVM;
+
+                    PersonVM personVM = new PersonVM(repositories.People);
+                    locator.PersonVM = personVM;
+
+                    ProductVM productVM = new ProductVM(repositories.Products);
+                    locator.ProductVM = productVM;
                 }
             };
             app.InitializeComponent();

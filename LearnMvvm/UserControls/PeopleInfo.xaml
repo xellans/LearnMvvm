@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:LearnMvvm.UserControls"
              
              mc:Ignorable="d" 
-             d:DesignHeight="434" d:DesignWidth="540" Background="{DynamicResource Brush1}">
+             d:DesignHeight="434" d:DesignWidth="540" Background="{DynamicResource Brush1}"
+             d:DataContext="{Binding PersonVM, Source={StaticResource locator}}">
     <!--xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
     <UserControl.DataContext>
         <vm:PersonVM/>
@@ -15,10 +16,10 @@
         <DataGrid Margin="1 0 0 0" 
           ItemsSource="{Binding PersonList}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="#" Binding="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="{DynamicResource Lang4}" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="{DynamicResource Lang5}" Binding="{Binding CompletedTasks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="{DynamicResource Lang6}" Binding="{Binding RemainsExecute, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="#" Binding="{Binding Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="{DynamicResource Lang4}" Binding="{Binding Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="{DynamicResource Lang5}" Binding="{Binding CompletedTasks, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="{DynamicResource Lang6}" Binding="{Binding RemainsExecute, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

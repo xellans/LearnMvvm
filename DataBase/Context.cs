@@ -5,7 +5,7 @@ namespace DataBase
     public class Context : DbContext
     {
         internal DbSet<User> User { get; set; } = null!;
-        internal DbSet<Person> Person { get; set; } = null!;
+        internal DbSet<Person> People { get; set; } = null!;
         internal DbSet<Product> Products { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

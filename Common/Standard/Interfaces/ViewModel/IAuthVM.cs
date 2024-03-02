@@ -1,5 +1,4 @@
-﻿
-using WpfCore;
+﻿using WpfCore;
 
 namespace Common.Standard.Interfaces.ViewModel
 {
