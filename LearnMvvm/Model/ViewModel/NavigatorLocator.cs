@@ -15,6 +15,7 @@ namespace LearnMvvm.Model.ViewModel
         public IPersonVM? PersonVM { get => Get<IPersonVM>(); set => Set(value); }
 
         public IProductVM? ProductVM { get => Get<IProductVM>(); set => Set(value); }
+        public ISettingVM? SettingVM { get => Get<SettingVM>(); set => Set(value); }
 
 
         public NavigatorLocator()
@@ -37,6 +38,12 @@ namespace LearnMvvm.Model.ViewModel
             {
                 ProductVM = new ProductVM();
                 obj = ProductVM;
+            }
+
+            if (nameof(SettingVM).Equals(obj))
+            {
+                SettingVM = new SettingVM();
+                obj = SettingVM;
             }
 
             CurrentContext = obj;

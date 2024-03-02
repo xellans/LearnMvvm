@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Standard.Interfaces.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,7 +11,7 @@ using WpfCore;
 
 namespace LearnMvvm.Model.ViewModel
 {
-    public class SettingVM :ViewModelBase
+    public class SettingVM :ViewModelBase, ISettingVM
     {
         #region Выбор темы
         private ICommand _DarkTheme;
@@ -27,7 +28,7 @@ namespace LearnMvvm.Model.ViewModel
         private ICommand _EnglishLangue;
         public ICommand EnglishLangue => _EnglishLangue ?? new RelayCommand(Set);
         #endregion
-        private void Set(object path)
+        public void Set(object path)
         {
             string directory = Path.GetDirectoryName(path.ToString()); //Так как по иерахии ресурсы лежат в своих папках, то для обновления ресурсов находим текущую папку
             // Удаляем ресурсы, содержащие названии папки в названии словаря

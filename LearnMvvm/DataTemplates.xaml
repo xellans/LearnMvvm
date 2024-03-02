@@ -17,24 +17,8 @@
             <userControls:ProductUserControl />
         </DataTemplate>
 
-        <!--<DataTemplate DataType="{x:Type vm:SettingVM}">
+        <DataTemplate x:Key="{x:Type vm:ISettingVM}">
             <userControls:SettingUserControl />
-        </DataTemplate>-->
+        </DataTemplate>
     </local:VmTemplateSelector>
-
-    <!--<DataTemplate DataType="{x:Type vm:AuthVM}">
-        <local:AuthUserControl />
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type vm:PersonVM}">
-        <userControls:PeopleInfo />
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type vm:ProductVM}">
-        <userControls:ProductUserControl />
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type vm:SettingVM}">
-        <userControls:SettingUserControl />
-    </DataTemplate>-->
 </ResourceDictionary>
