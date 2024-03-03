@@ -68,12 +68,14 @@ namespace DataBase
                              RepositoryMemories.ItToT,
                              new Exception("Товара с таким Id нет."),
                              RepositoryMemories.EqualsValues,
-                             new Exception("Товар с таким Id имеет другие свойства."));
+                             new Exception("Товар с таким Id имеет другие свойства."),
+                             RepositoryMemories.Convert);
             person = new Repository<IPerson, Person>(context,
                              RepositoryMemories.ItToT,
                              new Exception("Человека с таким Id нет."),
                              RepositoryMemories.EqualsValues,
-                             new Exception("Человек с таким Id имеет другие свойства."));
+                             new Exception("Человек с таким Id имеет другие свойства."),
+                             RepositoryMemories.Convert);
         }
 
         private readonly Repository<IProduct, Product> products;

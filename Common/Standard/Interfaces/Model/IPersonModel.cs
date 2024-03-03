@@ -8,8 +8,8 @@ namespace Common.Standard.Interfaces.Model
 {
     public interface IPersonModel
     {
-        public IRepository<IPerson> Repository { get; set; }
-        public IReadOnlyObservableCollection<IPerson> PersonCollections { get; set; }
+        public IRepository<IPerson> Repository { get; }
+        public IReadOnlyObservableCollection<IPerson> PersonCollections { get; }
         void CreatePerson();
     }
 }

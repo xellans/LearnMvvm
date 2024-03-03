@@ -5,13 +5,13 @@ namespace Repositories
 {
     public class PersonModel: IPersonModel
     {
-        public IRepository<IPerson> Repository { get; set; }
-        public IReadOnlyObservableCollection<IPerson> PersonCollections { get; set; }
+        public IRepository<IPerson> Repository { get; }
+        public IReadOnlyObservableCollection<IPerson> PersonCollections { get; }
 
-        public PersonModel(IRepository<IPerson> Repository) 
+        public PersonModel(IRepository<IPerson> repository) 
         {
-            this.Repository = Repository;
-            PersonCollections = Repository.ToObservableCollections();
+            this.Repository = repository;
+            PersonCollections = repository.ToObservableCollections();
             CreatePerson();
         }
         #region Заполнение бд, нужно только для примера.

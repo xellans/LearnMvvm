@@ -5,8 +5,8 @@ namespace Repositories
 {
     public class ProductModel : IProductModel
     {
-        public IRepository<IProduct> Product { get; set; }
-        public IReadOnlyObservableCollection<IProduct> ProductCollections { get; set; }
+        public IRepository<IProduct> Product { get;  }
+        public IReadOnlyObservableCollection<IProduct> ProductCollections { get; }
 
         public ProductModel(IRepository<IProduct> Product)
         {

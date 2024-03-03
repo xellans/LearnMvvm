@@ -7,16 +7,16 @@ namespace ViewModel
 {
     public class ProductVM: ViewModelBase, IProductVM
     {
-        public ProductVM(IProductModel Repository)
+        public ProductVM(IProductModel repository)
         {
-            this.Repository = Repository;
-            ProductDataList = Repository.ProductCollections;
-            Selected = Repository.Product.NewT();
+            this.repository = repository;
+            ProductDataList = repository.ProductCollections;
+            Selected = repository.Product.NewT();
         }
         public IReadOnlyObservableCollection<IProduct> ProductDataList { get => Get<IReadOnlyObservableCollection<IProduct>>(); set => Set(value); }
 
 
-        IProductModel Repository { get; set; }
+        IProductModel repository { get; set; }
 
         public IProduct Selected { get => Get<IProduct>(); set => Set(value); }
         #region Сохранение изменений
@@ -26,7 +26,7 @@ namespace ViewModel
         private void SaveEditExcute()
         {
             if (Selected != null)
-                Repository.Product.Update(Selected);
+                repository.Product.Update(Selected);
         }
         #endregion
 
@@ -39,8 +39,8 @@ namespace ViewModel
             if (Selected != null)
             {
                 int index  = ProductDataList.IndexOf(Selected);
-                Repository.Product.Remove(Selected);
-                ProductDataList.Remove(Selected);
+                repository.Product.Remove(Selected);
+                //ProductDataList.Remove(Selected);
                 if (index == ProductDataList.Count())
                     index--;
                 if(index >= 0)
@@ -56,7 +56,7 @@ namespace ViewModel
         private void AddExcute()
         {
             if (Selected != null)
-                Repository.Product.Add(Selected);
+                repository.Product.Add(Selected);
         }
         #endregion
     }

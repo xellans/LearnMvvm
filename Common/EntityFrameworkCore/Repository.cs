@@ -4,49 +4,72 @@ using System.Linq.Expressions;
 
 namespace Common.EntityFrameworkCore
 {
-    public class Repository<IT, T> : IRepository<IT>
-        where IT : IId
-        where T : class, IT
+    public class Repository<TTarget, TSource> : IRepository<TTarget>
+        where TTarget : IId
+        where TSource : class, TTarget
     {
         internal readonly DbContext context;
-        internal readonly Func<IT, T> itToT;
-        internal readonly DbSet<T> set;
+        internal readonly Func<TTarget, TSource> itToT;
+        internal readonly DbSet<TSource> set;
         internal readonly Exception notId;
-        internal readonly Func<IT, T, bool> equalsValues;
+        internal readonly Func<TTarget, TSource, bool> equalsValues;
         internal readonly Exception noEqualsValues;
-      //  internal readonly Func<IT, T> convert;
+        internal readonly Func<TTarget, TSource> convert;
 
-        public Repository(DbContext context, Func<IT, T> itToT, Exception notId, Func<IT, T, bool> equalsValues, Exception noEqualsValues)
+        /// <summary>Создание экземпляра репозитория.</summary>
+        /// <param name="context"><see cref="DbContext"/> из которого можно извлечь
+        /// <see cref="DbSet{TEntity}"/> для <see cref="TSource"/>.</param>
+        /// <param name="itToT">Делегат метода извлекающего из экземпляра типа
+        /// <see cref="TTarget"/>, или создающего из него, экземпляр
+        /// <see cref="TSource"/> для добавления в БД.</param>
+        /// <param name="notId">Исключение выкидваемое в случае отсутвия в БД
+        /// экземпляра <see cref="TSource"/> с указанным Id.</param>
+        /// <param name="equalsValues">Делегат метода проверяющего
+        /// на эквивалентность значений экземпляры <see cref="TTarget"/>
+        /// и <see cref="TSource"/>.</param>
+        /// <param name="noEqualsValues">сключение выкидваемое в случае
+        /// неэквивалентности значений экземпляров <see cref="TTarget"/>
+        /// и <see cref="TSource"/>.</param>
+        /// <param name="convert">Делегат метода извлекающего из экземпляра
+        /// типа <see cref="TTarget"/>, или создающего из него,
+        /// экземпляр <see cref="TSource"/> для обновления в БД.</param>
+        public Repository(DbContext context,
+                          Func<TTarget, TSource> itToT,
+                          Exception notId,
+                          Func<TTarget, TSource, bool> equalsValues,
+                          Exception noEqualsValues,
+                          Func<TTarget, TSource> convert)
         {
             this.context = context;
             this.itToT = itToT;
-            set = context.Set<T>();
+            set = context.Set<TSource>();
             this.notId = notId;
             this.equalsValues = equalsValues;
             this.noEqualsValues = noEqualsValues;
+            this.convert = convert;
         }
 
-        public IT? Add(IT it)
+        public TTarget? Add(TTarget it)
         {
-            T t = itToT(it);
+            TSource t = itToT(it);
             t.Id = 0;
             var result = set.Add(t);
             context.SaveChanges();
             return result.Entity;
         }
-        public IT? NewT() => Activator.CreateInstance<T>();
+        public TTarget? NewT() => Activator.CreateInstance<TSource>();
 
-        public bool Any(Expression<Func<IT, bool>> expression)
+        public bool Any(Expression<Func<TTarget, bool>> expression)
         {
             return set.Any(expression);
         }
 
-        public IT? FirstOrDefault()
+        public TTarget? FirstOrDefault()
         {
             return set.FirstOrDefault();
         }
 
-        public IT? FirstOrDefault(Expression<Func<IT, bool>> expression)
+        public TTarget? FirstOrDefault(Expression<Func<TTarget, bool>> expression)
         {
             return set.FirstOrDefault(expression);
         }
@@ -56,7 +79,7 @@ namespace Common.EntityFrameworkCore
             set.Load();
         }
 
-        public void Remove(IT it)
+        public void Remove(TTarget it)
         {
             var t = set.Find(it.Id) ?? throw notId;
             if (!equalsValues(it, t))
@@ -73,16 +96,16 @@ namespace Common.EntityFrameworkCore
             set.Remove(t);
             context.SaveChanges();
         }
-        public IReadOnlyObservableCollection<IT> ToObservableCollections()
+        public IReadOnlyObservableCollection<TTarget> ToObservableCollections()
         {
             set.Load();
-            IReadOnlyObservableCollection<IT>? collection;
+            IReadOnlyObservableCollection<TTarget>? collection;
             var list = set.Local.ToObservableCollection();
-            collection = new ReadOnlyObservableList<IT, T>(list);
+            collection = new ReadOnlyObservableList<TTarget, TSource>(list);
             return collection;
         }
 
-        public IT Update(IT it)
+        public TTarget Update(TTarget it)
         {
             var t = set.Find(it.Id) ?? throw notId;
             var entity = context.Entry(t);
@@ -90,7 +113,7 @@ namespace Common.EntityFrameworkCore
             context.SaveChanges();
             return it;
         }
-        public IQueryable<IT> Where(Expression<Func<IT, bool>> expression)
+        public IQueryable<TTarget> Where(Expression<Func<TTarget, bool>> expression)
         {
             return set.Where(expression);
         }

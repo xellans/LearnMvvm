@@ -18,7 +18,6 @@ namespace Common.Standard.Interfaces.Model
         INotifyPropertyChanged
     {
         int IndexOf(object? value);
-        void Remove(object? value);
     }
 
     public class ReadOnlyObservableList<T, Tsource> : IReadOnlyObservableCollection<T>
@@ -44,8 +43,8 @@ namespace Common.Standard.Interfaces.Model
 
 
         public int Count => obslist.Count;
-        public bool IsFixedSize => true; //list.IsFixedSize;
-        public bool IsReadOnly => true;//list.IsReadOnly;
+        //public bool IsFixedSize => true; //list.IsFixedSize;
+        //public bool IsReadOnly => true;//list.IsReadOnly;
         public bool IsSynchronized => collection.IsSynchronized;
         public object SyncRoot => collection.SyncRoot;
 
@@ -61,16 +60,16 @@ namespace Common.Standard.Interfaces.Model
             remove => notifyyPropertyChanged.PropertyChanged -= value;
         }
 
-        public int Add(object? value)
-        {
-            list.Add(value);
-            return obslist.Count;
-        }
+        //public int Add(object? value)
+        //{
+        //    list.Add(value);
+        //    return obslist.Count;
+        //}
 
-        public void Clear()
-        {
-            throw new NotImplementedException();
-        }
+        //public void Clear()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public bool Contains(object? value) => list.Contains(value);
 
@@ -85,18 +84,25 @@ namespace Common.Standard.Interfaces.Model
         }
 
 
-        public void Insert(int index, object? value)
-        {
-            throw new NotImplementedException();
-        }
+        //public void Insert(int index, object? value)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public void Remove(object? value) => list.Remove(value);
+        //public void Remove(object? value) => list.Remove(value);
 
-        public void RemoveAt(int index)
-        {
-            throw new NotImplementedException();
-        }
+        //public void RemoveAt(int index)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    }
+
+    public class ReadOnlyObservableList<T> : ReadOnlyObservableCollection<T>
+    {
+        public ReadOnlyObservableList(ObservableCollection<T> list)
+            : base(list)
+        { }
     }
 }

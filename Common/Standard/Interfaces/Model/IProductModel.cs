@@ -8,8 +8,8 @@ namespace Common.Standard.Interfaces.Model
 {
     public interface IProductModel
     {
-        public IRepository<IProduct> Product { get; set; }
-        public IReadOnlyObservableCollection<IProduct> ProductCollections { get; set; }
+        public IRepository<IProduct> Product { get; }
+        public IReadOnlyObservableCollection<IProduct> ProductCollections { get; }
         void CreateProduct();
     }
 }
