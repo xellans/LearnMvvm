@@ -34,14 +34,14 @@ namespace LearnMvvm
         {
             if (nameof(PersonVM).Equals(obj))
             {
-                IPersonModel model = new PersonModel(ContextRepositories.Person);
+                IPersonModel model = new PersonModel(ContextRepositories.Person());
                 PersonVM = new PersonVM(model);
                 obj = PersonVM;
             }
 
             if (nameof(ProductVM).Equals(obj))
             {
-                IProductModel model = new ProductModel(ContextRepositories.Products);
+                IProductModel model = new ProductModel(ContextRepositories.Products());
                 ProductVM = new ProductVM(model);
                 obj = ProductVM;
             }

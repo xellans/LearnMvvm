@@ -1,5 +1,7 @@
 ﻿using Common.EntityFrameworkCore;
 using Common.Standard.Interfaces.Model;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace DataBase
 {
@@ -58,30 +60,57 @@ namespace DataBase
             };
             return person;
         }
+
+        public static User ItToT(IUser iuser)
+        {
+            User user = new()
+            {
+                IsAuthorized = iuser.IsAuthorized,
+                Name = iuser.Name
+            };
+            return user;
+        }
+
+        public static bool EqualsValues(IUser iuser, User user)
+        {
+            return user.Name == iuser.Name;
+        }
     }
 
     public class ContextRepositories
     {
+        private Context context {  get; set; }
         public ContextRepositories(Context context)
         {
-            products = new(context,
-                             RepositoryMemories.ItToT,
-                             new Exception("Товара с таким Id нет."),
-                             RepositoryMemories.EqualsValues,
-                             new Exception("Товар с таким Id имеет другие свойства."));
-            person = new Repository<IPerson, Person>(context,
-                             RepositoryMemories.ItToT,
-                             new Exception("Человека с таким Id нет."),
-                             RepositoryMemories.EqualsValues,
-                             new Exception("Человек с таким Id имеет другие свойства."));
+            this.context = context;
+        }
+        public IRepository<IProduct> Products()
+        {
+            Repository<IProduct, Product> products = new(context,
+                                                         RepositoryMemories.ItToT,
+                                                         new Exception("Товара с таким Id нет."),
+                                                         RepositoryMemories.EqualsValues,
+                                                         new Exception("Товар с таким Id имеет другие свойства."));
+            return products;
+        }
+        public IRepository<IPerson> Person()
+        {
+            Repository<IPerson, Person> people = new(context,
+                                                     RepositoryMemories.ItToT,
+                                                     new Exception("Человека с таким Id нет."),
+                                                     RepositoryMemories.EqualsValues,
+                                                     new Exception("Человек с таким Id имеет другие свойства."));
+            return people;
         }
 
-        private readonly Repository<IProduct, Product> products;
-        private readonly Repository<IPerson, Person> person;
-        private readonly Repository<IUser, User> user;
-
-        public IRepository<IProduct> Products => products;
-        public IRepository<IPerson> Person => person;
-        public IRepository<IUser> User => user;
+        public IRepository<IUser> User()
+        {
+            Repository<IUser, User> user = new(context,
+                                                     RepositoryMemories.ItToT,
+                                                     new Exception("Человека с таким Id нет."),
+                                                     RepositoryMemories.EqualsValues,
+                                                     new Exception("Человек с таким Id имеет другие свойства."));
+            return user;
+        }
     }
 }

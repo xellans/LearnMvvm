@@ -1,5 +1,4 @@
 ﻿using Common.Standard.Interfaces.Model;
-using DataBase;
 
 namespace Repositories
 {
@@ -22,11 +21,9 @@ namespace Repositories
                 return;
             for (int i = 0; i < 10; i++)
             {
-                Product product = new Product()
-                {
-                    Name = digitalProducts[Random.Shared.Next(0, digitalProducts.Length - 1)],
-                    Description = digitalDescriptions[Random.Shared.Next(0, digitalDescriptions.Length - 1)]
-                };
+                var product = Product.NewT();
+                product.Name = digitalProducts[Random.Shared.Next(0, digitalProducts.Length - 1)];
+                product.Description = digitalDescriptions[Random.Shared.Next(0, digitalDescriptions.Length - 1)];
                 Product.Add(product);
             }
         }

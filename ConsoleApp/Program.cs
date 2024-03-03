@@ -5,9 +5,9 @@ using Repositories;
 Context context = new Context();
 ContextRepositories contextRepositories = new(context);
 
-IProductModel Productmodel = new ProductModel(contextRepositories.Products);
-IPersonModel PersonModel = new PersonModel(contextRepositories.Person);
-IRepository<IUser> User = contextRepositories.User;
+IProductModel Productmodel = new ProductModel(contextRepositories.Products());
+IPersonModel PersonModel = new PersonModel(contextRepositories.Person());
+IRepository<IUser> User = contextRepositories.User();
 
 string info = @"1 - Добавить нового пользователя
 2 - Проверить есть ли пользователь в бд
