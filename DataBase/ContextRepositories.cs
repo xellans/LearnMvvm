@@ -75,6 +75,16 @@ namespace DataBase
         {
             return user.Name == iuser.Name;
         }
+        public static User Convert(IUser iuser)
+        {
+            User user = new()
+            {
+                Id = iuser.Id,
+                Name = iuser.Name,
+                IsAuthorized = iuser.IsAuthorized
+            };
+            return user;
+        }
     }
 
     public class ContextRepositories
@@ -90,7 +100,8 @@ namespace DataBase
                                                          RepositoryMemories.ItToT,
                                                          new Exception("Товара с таким Id нет."),
                                                          RepositoryMemories.EqualsValues,
-                                                         new Exception("Товар с таким Id имеет другие свойства."));
+                                                         new Exception("Товар с таким Id имеет другие свойства."),
+                                                         RepositoryMemories.Convert);
             return products;
         }
         public IRepository<IPerson> Person()
@@ -99,7 +110,8 @@ namespace DataBase
                                                      RepositoryMemories.ItToT,
                                                      new Exception("Человека с таким Id нет."),
                                                      RepositoryMemories.EqualsValues,
-                                                     new Exception("Человек с таким Id имеет другие свойства."));
+                                                     new Exception("Человек с таким Id имеет другие свойства."),
+                                                     RepositoryMemories.Convert);
             return people;
         }
 
@@ -109,7 +121,8 @@ namespace DataBase
                                                      RepositoryMemories.ItToT,
                                                      new Exception("Человека с таким Id нет."),
                                                      RepositoryMemories.EqualsValues,
-                                                     new Exception("Человек с таким Id имеет другие свойства."));
+                                                     new Exception("Человек с таким Id имеет другие свойства."),
+                                                     RepositoryMemories.Convert);
             return user;
         }
     }
