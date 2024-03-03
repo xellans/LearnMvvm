@@ -29,7 +29,7 @@ namespace Common.EntityFrameworkCore
         public IT? Add(IT it)
         {
             T t = itToT(it);
-            t.Id = 0;
+            //t.Id = 0; Это присвоение должно быть в методе itToT
             var result = set.Add(t);
             context.SaveChanges();
             return result.Entity;

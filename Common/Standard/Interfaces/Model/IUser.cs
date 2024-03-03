@@ -2,14 +2,13 @@
 {
     public interface IUser : IId
     {
-        public long Id { get; set; }
         /// <summary>
         /// Имя пользователя
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; }
         /// <summary>
         /// Возвращает true если пользователь авторизирован
         /// </summary>
-        public bool IsAuthorized { get; set; }
+        public bool IsAuthorized { get; }
     }
 }

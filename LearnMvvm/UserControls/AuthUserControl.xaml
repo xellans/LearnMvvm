@@ -61,7 +61,7 @@
             <TextBlock Margin="10 10 0 0" Foreground="#3B454A" FontSize="16">Окно авторизации</TextBlock>
             <Rectangle Grid.Row="1" Margin="0 5 0 0" Stroke="#DDDDDD" StrokeThickness="1"></Rectangle>
             <TextBlock Grid.Row="2" FontSize="13" Foreground="#3B454A" Margin="14 5 0 0">Имя пользователя</TextBlock>
-            <TextBox x:Name="Name" Grid.Row="3" Height="32" Foreground="#3B454A" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="#DDDDDD" BorderThickness="1" Margin="14 5 14 0"></TextBox>
+            <TextBox Grid.Row="3" Height="32" Foreground="#3B454A" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="#DDDDDD" BorderThickness="1" Margin="14 5 14 0"></TextBox>
             <Button Style="{DynamicResource ButtonStyle}" Command="{Binding AuthorizeCommand}" CommandParameter="{Binding Text, ElementName=Name}" Grid.Row="5" Height="32" BorderBrush="#DDDDDD" BorderThickness="1" Margin="14 8 14 0">Авторизоваться</Button>
         </Grid>
     </Grid>

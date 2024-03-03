@@ -13,7 +13,7 @@ namespace DataBase
     public class Context : DbContext
     {
         public DbSet<User> User { get; set; } = null!;
-        public DbSet<Person> Person { get; set; } = null!;
+        public DbSet<Person> People { get; set; } = null!;
         public DbSet<Product> Product { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -22,25 +22,23 @@ namespace DataBase
                 Directory.CreateDirectory(path);
             optionsBuilder.UseSqlite(@$"Data Source={path}\\Data Base.db");
         }
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Product>(e =>
-        //    {
-        //        e.Property(x => x.Id);
-        //    });
-        //}
-    }
-    public class Repo<T> where T : Context
-    {
-
-        public IList<T> GetList()
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            using (var context = new Context())
-            {
-
-                return context.Set<T>().ToList();
-            }
+            modelBuilder.Entity<Product>().HasData(ProductsInitData.CreateProducts());
+            modelBuilder.Entity<Person>().HasData(PeopleInitData.CreatePeople());
         }
-
     }
+    //public class Repo<T> where T : Context
+    //{
+
+    //    public IList<T> GetList()
+    //    {
+    //        using (var context = new Context())
+    //        {
+
+    //            return context.Set<T>().ToList();
+    //        }
+    //    }
+
+    //}
 }

@@ -2,6 +2,6 @@
 {
     public interface IId
     {
-        long Id { get; set; }
+        long Id { get; }
     }
 }

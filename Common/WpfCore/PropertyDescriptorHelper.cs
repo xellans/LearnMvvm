@@ -26,7 +26,12 @@ namespace Common.WpfCore
         public static void SetValue<T>(this T target, string propertyName, object value)
             where T : class
         {
-            GetProperties(target.GetType())[propertyName].SetValue(target, value);
+            PropertyDescriptor? property = GetProperties(target.GetType())[propertyName];
+            if (property is null)
+            {
+                throw new ArgumentException("Свойства с таким именем нет.", nameof(propertyName));
+            }
+            property.SetValue(target, value);
         }
         public static void SetValue<T>(this T target, PropertyDescriptor propertyDescriptor, object value)
             where T : class
@@ -34,12 +39,17 @@ namespace Common.WpfCore
             propertyDescriptor.SetValue(target, value);
         }
 
-        public static object GetValue<T>(this T target, string propertyName)
+        public static object? GetValue<T>(this T target, string propertyName)
             where T : class
         {
-            return GetProperties(target.GetType())[propertyName].GetValue(target);
+            PropertyDescriptor? property = GetProperties(target.GetType())[propertyName];
+            if (property is null)
+            {
+                throw new ArgumentException("Свойства с таким именем нет.", nameof(propertyName));
+            }
+            return property.GetValue(target);
         }
-        public static object GetValue<T>(this T target, PropertyDescriptor propertyDescriptor)
+        public static object? GetValue<T>(this T target, PropertyDescriptor propertyDescriptor)
             where T : class
         {
             return propertyDescriptor.GetValue(target);
@@ -99,9 +109,9 @@ namespace Common.WpfCore
             return pHandler;
         }
 
-        private static PropertyHandler RemovePropertyHandler(DependencyObject source, DependencyPropertyChangedHandler handler, DependencyProperty property)
+        private static PropertyHandler? RemovePropertyHandler(DependencyObject source, DependencyPropertyChangedHandler handler, DependencyProperty property)
         {
-            PropertyHandler pHandler = null;
+            PropertyHandler? pHandler = null;
             if (handlers.TryGetValue(source, out var properties))
             {
                 if (properties.TryGetValue((handler, property), out pHandler))
@@ -132,7 +142,7 @@ namespace Common.WpfCore
 
             public object OldValue { get; private set; }
 
-            public void Raise(object sender, EventArgs e)
+            public void Raise(object? sender, EventArgs e)
             {
                 if (sender is not DependencyObject dObj)
                 {

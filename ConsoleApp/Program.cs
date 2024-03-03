@@ -1,11 +1,6 @@
-﻿using DataBase;
-using Microsoft.EntityFrameworkCore;
-using Repositories;
-
-//UserRepository User = new UserRepository();
+﻿//UserRepository User = new UserRepository();
 
 //IPersonRepository Person = new PersonRepository();
-
 
 string info = @"1 - Добавить нового пользователя
 2 - Проверить есть ли пользователь в бд
@@ -45,10 +40,12 @@ void AddUser()
     string text = Console.ReadLine();
     if (text != null && text != "")
     {
-        User _user = new User();
-        _user.Name = text;
-     //   if(User.Command.Any(x => x.Name == _user.Name));
-       // User.Command.Add(_user);
+        User _user = new User
+        {
+            Name = text
+        };
+        //   if(User.Command.Any(x => x.Name == _user.Name));
+        // User.Command.Add(_user);
         Console.WriteLine($"Пользователь {text} был добавлен");
     }
     else

@@ -9,17 +9,17 @@ using System.Xml.Linq;
 
 namespace Repositories
 {
-    public class Authorized: IAuthorized
+    public class Authorized : IAuthorized
     {
-        public Authorized() 
+        public Authorized(Context context)
         {
-            Context = new();
-            Context.Database.EnsureCreated();
-            User? old = Context.User.FirstOrDefault();
+            this.context = context;
+            //context.Database.EnsureCreated();
+            User? old = context.User.FirstOrDefault();
             if (old != null)
                 IsAuthorized = old.IsAuthorized;
         }
-        private Context Context;
+        private readonly Context context;
 
         public bool IsAuthorized { get; private set; }
 
@@ -30,11 +30,11 @@ namespace Repositories
             IsAuthorizedChangedEventArgs args = new IsAuthorizedChangedEventArgs(!string.IsNullOrEmpty(name));
             if (args.IsAuthorized)
             {
-                User? old = Context.User.FirstOrDefault(x => x.Name == name);
+                User? old = context.User.FirstOrDefault(x => x.Name == name);
                 if (old is null)
                 {
-                    Context.User.Add(new User() { Name = name, IsAuthorized = true });
-                    Context.SaveChanges();
+                    context.User.Add(new User() { Name = name, IsAuthorized = true });
+                    context.SaveChanges();
                 }
             }
             IsAuthorized = args.IsAuthorized;

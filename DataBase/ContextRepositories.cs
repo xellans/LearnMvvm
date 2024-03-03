@@ -80,6 +80,6 @@ namespace DataBase
         private readonly Repository<IPerson, Person> person;
 
         public IRepository<IProduct> Products => products;
-        public IRepository<IPerson> Person => person;
+        public IRepository<IPerson> People => person;
     }
 }

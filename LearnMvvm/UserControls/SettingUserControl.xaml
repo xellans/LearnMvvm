@@ -6,10 +6,11 @@
              xmlns:local="clr-namespace:LearnMvvm.UserControls"
              mc:Ignorable="d" 
              xmlns:vm="clr-namespace:LearnMvvm.Model.ViewModel"
-             d:DesignHeight="434" d:DesignWidth="540" Background="{DynamicResource Brush1}">
-    <UserControl.DataContext>
+             d:DesignHeight="434" d:DesignWidth="540" Background="{DynamicResource Brush1}" 
+             d:DataContext="{Binding SettingVM, Source={StaticResource locator}}">
+    <!--<UserControl.DataContext>
         <vm:SettingVM/>
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
     <Grid>
         <StackPanel Margin="10 10 0 0" Width="222" HorizontalAlignment="Left">
             <Button Margin="0 5 10 0" Content="{DynamicResource Lang12}" Command="{Binding DarkTheme}" CommandParameter="Themes\DarkTheme.xaml"></Button>

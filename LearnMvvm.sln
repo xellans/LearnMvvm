@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositorie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{0C04A175-1B3B-438E-A1B6-AFAD253D2DBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationBuild", "ApplicationBuild\ApplicationBuild.csproj", "{F450F1EA-A21B-47F1-AAE9-FEA7B7D14B04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SomeViewModel", "SomeViewModel\SomeViewModel.csproj", "{41613DCD-8642-46C1-824E-642167E3B576}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{0C04A175-1B3B-438E-A1B6-AFAD253D2DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C04A175-1B3B-438E-A1B6-AFAD253D2DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C04A175-1B3B-438E-A1B6-AFAD253D2DBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F450F1EA-A21B-47F1-AAE9-FEA7B7D14B04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F450F1EA-A21B-47F1-AAE9-FEA7B7D14B04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F450F1EA-A21B-47F1-AAE9-FEA7B7D14B04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F450F1EA-A21B-47F1-AAE9-FEA7B7D14B04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41613DCD-8642-46C1-824E-642167E3B576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41613DCD-8642-46C1-824E-642167E3B576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41613DCD-8642-46C1-824E-642167E3B576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41613DCD-8642-46C1-824E-642167E3B576}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

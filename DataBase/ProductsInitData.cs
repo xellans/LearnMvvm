@@ -1,39 +1,23 @@
-﻿using Common.Standard.Interfaces.Model;
-using DataBase;
-
-namespace Repositories
+﻿namespace DataBase
 {
-    public class ProductModel
+    public static class ProductsInitData
     {
-        public IRepository<IProduct> Product { get; set; }
-        public IReadOnlyObservableCollection<IProduct> ProductCollections;
-
-        public ProductModel()
+        #region Данные для заполнения новой БД.
+        public static IEnumerable<Product> CreateProducts()
         {
-            Context context = new();
-            ContextRepositories repositories = new(context);
-            Product = repositories.Products;
-            ProductCollections = Product.ToObservableCollections();
-            CreateProduct();
-        }
-
-        #region Заполнение бд, нужно только для примера.
-        private void CreateProduct()
-        {
-            if (ProductCollections.Count() > 0)
-                return;
-            for (int i = 0; i < 10; i++)
+            for (int i = 1; i <= 10; i++)
             {
                 Product product = new Product()
                 {
+                    Id = i,
                     Name = digitalProducts[Random.Shared.Next(0, digitalProducts.Length - 1)],
                     Description = digitalDescriptions[Random.Shared.Next(0, digitalDescriptions.Length - 1)]
                 };
-                Product.Add(product);
+                yield return product;
             }
         }
 
-        string[] digitalProducts = new string[]  {
+        private static readonly string[] digitalProducts = new string[]  {
     "Смартфон", "Ноутбук", "Планшет", "Смарт-часы", "Наушники", "Фотоаппарат", "Игровая консоль", "Внешний жесткий диск",
     "Роутер", "Флешка", "Принтер", "Монитор", "Клавиатура", "Мышь", "Веб-камера", "Компьютерная мышь",
     "Жесткий диск", "Процессор", "Видеокарта", "Материнская плата", "Оперативная память", "SSD", "ТВ-приставка", "Колонки",
@@ -48,7 +32,7 @@ namespace Repositories
     "Смарт-карман", "Смарт-бинокль", "Смарт-очки", "Смарт-органайзер", "Смарт-авто", "Смарт-ретро", "Смарт-штаны", "Смарт-симулятор"
 };
 
-        string[] digitalDescriptions = new string[] {
+        private static readonly string[] digitalDescriptions = new string[] {
     "Мощное мобильное устройство", "Портативный компьютер для работы и развлечений",
     "Удобный планшет для мультимедийных контента", "Интеллектуальные часы с множеством функций",
     "Качественное звучание и комфорт использования", "Устройство для фотографии, видеосъемки",
