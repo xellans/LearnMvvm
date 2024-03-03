@@ -16,7 +16,11 @@ namespace Common.Standard.Interfaces.Model
         void Remove(int Id);
         T Update(T t);
         T? Add(T t);
-        T? NewT();
+
+        //Смысла нет в этом методе. Для его использования нужно, что T был с мутабльными свойствами.
+        //А смысл нашей реализации в том, чтобы T мог менять только Репозиторий.
+        //T? NewT();
+        
         IReadOnlyObservableCollection<T> ToObservableCollections();
     }
 }

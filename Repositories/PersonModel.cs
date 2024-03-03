@@ -18,14 +18,15 @@ namespace Repositories
         {
             if (PersonCollections.Count() > 0)
                 return;
+
             string[] peopleArray = { "Алиса", "Екатерина", "Василий", "Андрей", "Пётр", "Инна", "Вика", "Жанна", "Ксюша", "Анатолий" };
             for (int i = 0; i < 200; i++)
             {
-                var people = Repository.NewT();
-                people.Name = peopleArray[Random.Shared.Next(0, 9)];
-                people.CompletedTasks = Random.Shared.Next(10, 1000);
-                people.RemainsExecute = Random.Shared.Next(10, 1000);
-                Repository.Add(people);
+                var person = new PersonDto();
+                person.Name = peopleArray[Random.Shared.Next(0, 9)];
+                person.CompletedTasks = Random.Shared.Next(10, 1000);
+                person.RemainsExecute = Random.Shared.Next(10, 1000);
+                Repository.Add(person);
             }
         }
         #endregion
