@@ -1,11 +1,13 @@
-﻿using DataBase;
-using Microsoft.EntityFrameworkCore;
+﻿using Common.Standard.Interfaces.Model;
+using DataBase;
 using Repositories;
 
-//UserRepository User = new UserRepository();
+Context context = new Context();
+ContextRepositories contextRepositories = new(context);
 
-//IPersonRepository Person = new PersonRepository();
-
+IProductModel Productmodel = new ProductModel(contextRepositories.Products);
+IPersonModel PersonModel = new PersonModel(contextRepositories.Person);
+IRepository<IUser> User = contextRepositories.User;
 
 string info = @"1 - Добавить нового пользователя
 2 - Проверить есть ли пользователь в бд
@@ -24,15 +26,14 @@ Console.WriteLine(info);
         ExistUser();
         break;
     case "3":
-       // Person.CreatePerson();
+        PersonModel.CreatePerson();
         Console.WriteLine("Люди были добавлены в базу");
         break;
     case "4":
-     //   var array = Person.PersonCollections;
         // Выводим весь список людей
-      //  foreach (var person in array)
+        foreach (var person in PersonModel.PersonCollections)
         {
-        //    Console.WriteLine($"Id: {person.Id}, Name: {person.Name}, CompletedTasks: {person.CompletedTasks}, RemainsExecute: {person.RemainsExecute}");
+            Console.WriteLine($"Id: {person.Id}, Name: {person.Name}, CompletedTasks: {person.CompletedTasks}, RemainsExecute: {person.RemainsExecute}");
         }
         break;
 }
@@ -47,8 +48,8 @@ void AddUser()
     {
         User _user = new User();
         _user.Name = text;
-     //   if(User.Command.Any(x => x.Name == _user.Name));
-       // User.Command.Add(_user);
+        if(User.Any(x => x.Name == _user.Name));
+         User.Add(_user);
         Console.WriteLine($"Пользователь {text} был добавлен");
     }
     else
@@ -62,10 +63,10 @@ void ExistUser()
     {
         var _user = new User();
         _user.Name = text;
-      //  var exist = User.Command.Any(x => x.Name == _user.Name);
-       // if(exist)
-        Console.WriteLine($"Пользователь {text} есть в бд");
-      //  else
+        var exist = User.Any(x => x.Name == _user.Name);
+        if (exist)
+            Console.WriteLine($"Пользователь {text} есть в бд");
+        else
             Console.WriteLine($"Пользователя {text} нет в бд");
     }
     else

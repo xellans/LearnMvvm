@@ -78,8 +78,10 @@ namespace DataBase
 
         private readonly Repository<IProduct, Product> products;
         private readonly Repository<IPerson, Person> person;
+        private readonly Repository<IUser, User> user;
 
         public IRepository<IProduct> Products => products;
         public IRepository<IPerson> Person => person;
+        public IRepository<IUser> User => user;
     }
 }

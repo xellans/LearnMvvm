@@ -3,22 +3,20 @@ using DataBase;
 
 namespace Repositories
 {
-    public class ProductModel
+    public class ProductModel : IProductModel
     {
         public IRepository<IProduct> Product { get; set; }
-        public IReadOnlyObservableCollection<IProduct> ProductCollections;
+        public IReadOnlyObservableCollection<IProduct> ProductCollections { get; set; }
 
-        public ProductModel()
+        public ProductModel(IRepository<IProduct> Product)
         {
-            Context context = new();
-            ContextRepositories repositories = new(context);
-            Product = repositories.Products;
             ProductCollections = Product.ToObservableCollections();
+            this.Product = Product;
             CreateProduct();
         }
 
         #region Заполнение бд, нужно только для примера.
-        private void CreateProduct()
+        public void CreateProduct()
         {
             if (ProductCollections.Count() > 0)
                 return;

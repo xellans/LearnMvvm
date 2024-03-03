@@ -3,16 +3,14 @@ using DataBase;
 
 namespace Repositories
 {
-    public class PersonModel
+    public class PersonModel: IPersonModel
     {
         public IRepository<IPerson> Repository { get; set; }
-        public IReadOnlyObservableCollection<IPerson> PersonCollections;
+        public IReadOnlyObservableCollection<IPerson> PersonCollections { get; set; }
 
-        public PersonModel() 
+        public PersonModel(IRepository<IPerson> Repository) 
         {
-            Context context = new();
-            ContextRepositories repositories = new(context);
-            Repository = repositories.Person;
+            this.Repository = Repository;
             PersonCollections = Repository.ToObservableCollections();
             CreatePerson();
         }

@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LearnMvvm"
         xmlns:userControls="clr-namespace:LearnMvvm.UserControls"
-        xmlns:vm="clr-namespace:LearnMvvm.Model.ViewModel"
         mc:Ignorable="d"
         DataContext="{DynamicResource locator}"
         Style="{StaticResource CustomWindowStyle}"

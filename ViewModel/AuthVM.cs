@@ -1,17 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using WpfCore;
+﻿using WpfCore;
 using Common.Standard.Interfaces.ViewModel;
 using Common.Standard.Interfaces.Model;
 
-namespace LearnMvvm.Model.ViewModel
+namespace ViewModel
 {
     public class AuthVM : ViewModelBase, IAuthVM
     {

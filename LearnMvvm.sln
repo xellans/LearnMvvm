@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositorie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{0C04A175-1B3B-438E-A1B6-AFAD253D2DBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "ViewModel\ViewModel.csproj", "{F078F182-50EB-45D5-9FB2-E9561C9919CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{0C04A175-1B3B-438E-A1B6-AFAD253D2DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C04A175-1B3B-438E-A1B6-AFAD253D2DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C04A175-1B3B-438E-A1B6-AFAD253D2DBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F078F182-50EB-45D5-9FB2-E9561C9919CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F078F182-50EB-45D5-9FB2-E9561C9919CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F078F182-50EB-45D5-9FB2-E9561C9919CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F078F182-50EB-45D5-9FB2-E9561C9919CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

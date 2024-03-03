@@ -1,18 +1,17 @@
 ﻿using WpfCore;
 using Common.Standard.Interfaces.Model;
 using Common.Standard.Interfaces.ViewModel;
-using Repositories;
 
-namespace LearnMvvm.Model.ViewModel
+namespace ViewModel
 {
     public class PersonVM: ViewModelBase, IPersonVM
     {
-        public PersonVM()
+        public PersonVM(IPersonModel Person)
         {
-            Repository = new PersonModel();
-            PersonList = Repository.PersonCollections;
+            this.Person = Person;
+            PersonList = Person.PersonCollections;
         }
         public IReadOnlyObservableCollection<IPerson> PersonList { get => Get<IReadOnlyObservableCollection<IPerson>>(); set => Set(value); }
-        public PersonModel Repository;
+        public IPersonModel Person { get; set; }
     }
 }

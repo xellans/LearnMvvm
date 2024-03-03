@@ -1,25 +1,22 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using WpfCore;
 using Common.Standard.Interfaces.Model;
 using Common.Standard.Interfaces.ViewModel;
-using Repositories;
-using Common.EntityFrameworkCore;
 
-namespace LearnMvvm.Model.ViewModel
+namespace ViewModel
 {
     public class ProductVM: ViewModelBase, IProductVM
     {
-        public ProductVM()
+        public ProductVM(IProductModel Repository)
         {
-            Repository = new();
+            this.Repository = Repository;
             ProductDataList = Repository.ProductCollections;
             Selected = Repository.Product.NewT();
         }
         public IReadOnlyObservableCollection<IProduct> ProductDataList { get => Get<IReadOnlyObservableCollection<IProduct>>(); set => Set(value); }
 
 
-        private ProductModel Repository { get; set; }
+        IProductModel Repository { get; set; }
 
         public IProduct Selected { get => Get<IProduct>(); set => Set(value); }
         #region Сохранение изменений

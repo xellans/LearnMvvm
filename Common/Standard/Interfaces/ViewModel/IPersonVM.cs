@@ -10,6 +10,7 @@ namespace Common.Standard.Interfaces.ViewModel
 {
     public interface IPersonVM
     {
-        public IReadOnlyObservableCollection<IPerson> PersonList { get; set; }
+        public IReadOnlyObservableCollection<IPerson> PersonList { get; }
+        IPersonModel Person { get; set; }
     }
 }

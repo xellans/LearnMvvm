@@ -4,11 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LearnMvvm"
-             xmlns:vm="clr-namespace:LearnMvvm.Model.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             DataContext="{Binding Path=(vm:NavigatorLocator.Navigator).AuthVM, RelativeSource={RelativeSource Self}}"
-             vm:NavigatorLocator.Navigator="{DynamicResource locator}">
+             DataContext="{Binding Path=(local:NavigatorLocator.Navigator).AuthVM, RelativeSource={RelativeSource Self}}"
+             local:NavigatorLocator.Navigator="{DynamicResource locator}">
     <UserControl.Resources>
         <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Height" Value="26"/>

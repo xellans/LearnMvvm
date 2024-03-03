@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LearnMvvm.UserControls"
              mc:Ignorable="d" 
-             xmlns:vm="clr-namespace:LearnMvvm.Model.ViewModel"
              d:DesignHeight="434" d:DesignWidth="540" Background="{DynamicResource Brush1}">
     <Grid x:Name="Grids">
         <Grid.ColumnDefinitions>
@@ -30,7 +29,7 @@
                 <DataTemplate DataType="ListBox">
                     <StackPanel>
                         <TextBlock Text="{Binding Name}"></TextBlock>
-                        <TextBlock Margin="0 4 0 0" Text="{Binding Description}"></TextBlock>
+                        <TextBlock Margin="0 4 0 0" Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

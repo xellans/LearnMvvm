@@ -1,15 +1,17 @@
 ﻿using Common.Standard.Interfaces.ViewModel;
 using Repositories;
-using System.ComponentModel;
 using System.Windows;
 using WpfCore;
 using Common.Standard.Interfaces.Model;
+using DataBase;
+using ViewModel;
 
-namespace LearnMvvm.Model.ViewModel
+namespace LearnMvvm
 {
     // Это классы уровня View
     public class NavigatorLocator : ViewModelBase
     {
+        private ContextRepositories ContextRepositories { get; set; }
         public IAuthVM? AuthVM { get => Get<IAuthVM>(); set => Set(value); }
         
         public IPersonVM? PersonVM { get => Get<IPersonVM>(); set => Set(value); }
@@ -20,6 +22,8 @@ namespace LearnMvvm.Model.ViewModel
 
         public NavigatorLocator()
         {
+            Context context = new Context();
+            ContextRepositories = new ContextRepositories(context);
             IAuthorized authorized = new Authorized();
             AuthVM = new AuthVM(authorized);
         }
@@ -30,13 +34,15 @@ namespace LearnMvvm.Model.ViewModel
         {
             if (nameof(PersonVM).Equals(obj))
             {
-                PersonVM = new PersonVM();
+                IPersonModel model = new PersonModel(ContextRepositories.Person);
+                PersonVM = new PersonVM(model);
                 obj = PersonVM;
             }
 
             if (nameof(ProductVM).Equals(obj))
             {
-                ProductVM = new ProductVM();
+                IProductModel model = new ProductModel(ContextRepositories.Products);
+                ProductVM = new ProductVM(model);
                 obj = ProductVM;
             }
 
