@@ -14,15 +14,16 @@ namespace Repositories
 {
     public class Authorized: IAuthorized
     {
-        public Authorized() 
+        public Authorized(Context context) 
         {
-            Context = new();
-            Context.Database.EnsureCreated();
-            User? old = Context.User.FirstOrDefault();
+            //Context = new();
+            this.context = context;
+            //this.context.Database.EnsureCreated();
+            User? old = this.context.User.FirstOrDefault();
             if (old != null)
                 IsAuthorized = old.IsAuthorized;
         }
-        private Context Context;
+        private Context context;
 
         public bool IsAuthorized { get; private set; }
 
@@ -33,7 +34,7 @@ namespace Repositories
             IsAuthorizedChangedEventArgs args = new IsAuthorizedChangedEventArgs(!string.IsNullOrEmpty(name));
             if (args.IsAuthorized)
             {
-                User? old = Context.User.FirstOrDefault(x => x.Name == name);
+                User? old = context.User.FirstOrDefault(x => x.Name == name);
                 if (old is null)
                 {
                     // Context.User.Add(user);
@@ -45,11 +46,11 @@ namespace Repositories
                     //}));
 
 
-                    var user = Context.CreateProxy<User>();
+                    var user = context.CreateProxy<User>();
                     user.IsAuthorized = true;
                     user.Name = name;
-                    Context.Add(user);
-                    Context.SaveChanges();
+                    context.Add(user);
+                    context.SaveChanges();
                 }
             }
             IsAuthorized = args.IsAuthorized;
