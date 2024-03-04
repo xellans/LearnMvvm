@@ -1,5 +1,4 @@
 ﻿using Common.Standard.Interfaces.Model;
-using System.Diagnostics;
 using System.Text.Json;
 
 namespace Authorized
@@ -7,15 +6,15 @@ namespace Authorized
     public class Implementation : IAuthorized, IDisposable
     {
         private readonly FileStream file;
-        private readonly Dictionary<string, User> users;
+        private readonly Dictionary<string, UserDto> users;
 
         public Implementation(string fileName)
         {
             file = File.Open(fileName, FileMode.OpenOrCreate);
-            List<User>? users;
+            List<UserDto>? users;
             try
             {
-                users = JsonSerializer.Deserialize<List<User>>(file);
+                users = JsonSerializer.Deserialize<List<UserDto>>(file);
             }
             catch (Exception)
             {
@@ -24,7 +23,7 @@ namespace Authorized
 
             if (users is null)
             {
-                users = new List<User>();
+                users = new List<UserDto>();
                 file.SetLength(0);
                 JsonSerializer.Serialize(file, users);
                 file.Flush();
@@ -51,9 +50,9 @@ namespace Authorized
             if (args.IsAuthorized)
             {
 
-                if (!users.TryGetValue(name!, out User? user))
+                if (!users.TryGetValue(name!, out UserDto user))
                 {
-                    users[name!] = user = new User() { Name = name!, IsAuthorized = true };
+                    users[name!] = user = new UserDto() { Name = name!, IsAuthorized = true };
                 }
 
                 user.IsAuthorized = true;
@@ -78,14 +77,4 @@ namespace Authorized
         }
         ~Implementation() => Dispose();
     }
-
-    internal class User
-    {
-        public string Name { get; set; } = string.Empty;
-        /// <summary>
-        /// Возвращает true если пользователь авторизирован
-        /// </summary>
-        public bool IsAuthorized { get; set; }
-    }
-
 }

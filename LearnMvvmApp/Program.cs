@@ -1,4 +1,5 @@
-﻿using DataBase;
+﻿using Authorized;
+using DataBase;
 using LearnMvvm;
 using Repositories;
 using System.CodeDom.Compiler;
@@ -35,7 +36,7 @@ namespace LearnMvvmApp
 
                     app.Exit += delegate { authorized.Dispose(); };
 
-                    MainModel mainModel = new MainModel(authorized, repositories.Products, repositories.People);
+                    MainModel mainModel = new MainModel(authorized, repositories.Products, repositories.People, new InitProductRepository(), new InitPeopleRepository());
 
                     AuthVM authVM = new(mainModel.Authorized);
 
