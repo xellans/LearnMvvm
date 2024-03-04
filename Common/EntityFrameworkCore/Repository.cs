@@ -1,5 +1,7 @@
 ﻿using Common.Standard.Interfaces.Model;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.ComponentModel;
 using System.Linq.Expressions;
 
 namespace Common.EntityFrameworkCore
@@ -9,8 +11,9 @@ namespace Common.EntityFrameworkCore
         where TSource : class, TTarget
     {
         internal readonly DbContext context;
-        internal readonly Func<TTarget, TSource> itToT;
-        internal readonly DbSet<TSource> set;
+        internal readonly Func<TTarget, DbContext, TSource> itToT;
+        public DbSet<TSource> set { get; set; }
+
         internal readonly Exception notId;
         internal readonly Func<TTarget, TSource, bool> equalsValues;
         internal readonly Exception noEqualsValues;
@@ -34,7 +37,7 @@ namespace Common.EntityFrameworkCore
         /// типа <see cref="TTarget"/>, или создающего из него,
         /// экземпляр <see cref="TSource"/> для обновления в БД.</param>
         public Repository(DbContext context,
-                          Func<TTarget, TSource> itToT,
+                          Func<TTarget, DbContext, TSource> itToT,
                           Exception notId,
                           Func<TTarget, TSource, bool> equalsValues,
                           Exception noEqualsValues,
@@ -51,7 +54,7 @@ namespace Common.EntityFrameworkCore
 
         public TTarget? Add(TTarget it)
         {
-            TSource t = itToT(it);
+            TSource t = itToT(it, context);
             t.Id = 0;
             var result = set.Add(t);
             context.SaveChanges();

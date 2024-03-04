@@ -5,15 +5,15 @@ namespace DataBase
 {
     public class User : IUser
     {
-        public long Id { get; set; }
+        public virtual long Id { get; set; }
         /// <summary>
         /// Имя пользователя
         /// </summary>
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
         /// <summary>
         /// Возвращает true если пользователь авторизирован
         /// </summary>
-        public bool IsAuthorized { get; set; }
+        public virtual bool IsAuthorized { get; set; }
     }
 
 }

@@ -1,8 +1,11 @@
 ﻿using Common.Standard.Interfaces.Model;
+using Common.WpfCore;
 using DataBase;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -33,12 +36,25 @@ namespace Repositories
                 User? old = Context.User.FirstOrDefault(x => x.Name == name);
                 if (old is null)
                 {
-                    Context.User.Add(new User() { Name = name, IsAuthorized = true });
+                    // Context.User.Add(user);
+                    //            Context.User.Add(Context.CreateProxy<User>(
+                    //p =>
+                    //{
+                    //    p.Name = name;
+                    //    p.IsAuthorized = true;
+                    //}));
+
+
+                    var user = Context.CreateProxy<User>();
+                    user.IsAuthorized = true;
+                    user.Name = name;
+                    Context.Add(user);
                     Context.SaveChanges();
                 }
             }
             IsAuthorized = args.IsAuthorized;
             AuthorizedChanged?.Invoke(this, args);
         }
+
     }
 }

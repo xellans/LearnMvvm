@@ -9,9 +9,9 @@ namespace DataBase
 {
     public class Person : IPerson
     {
-        public long Id { get; set; }
-        public string Name { get; set; }
-        public int CompletedTasks { get; set; }
-        public int RemainsExecute { get; set; }
+        public virtual long Id { get; set; }
+        public virtual string Name { get; set; }
+        public  virtual int CompletedTasks { get; set; }
+        public virtual int RemainsExecute { get; set; }
     }
 }

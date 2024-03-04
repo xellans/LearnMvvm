@@ -7,14 +7,11 @@ namespace DataBase
 {
     internal static class RepositoryMemories
     {
-        public static Product ItToT(IProduct iproduct)
+        public static Product ItToT(IProduct iproduct, DbContext context)
         {
-            Product product = new()
-            {
-                Id = iproduct.Id,
-                Description = iproduct.Description,
-                Name = iproduct.Name
-            };
+            var product = context.CreateProxy<Product>();
+            product.Description = iproduct.Description;
+            product.Name = iproduct.Name;
             return product;
         }
 
@@ -33,16 +30,10 @@ namespace DataBase
             };
             return product;
         }
-        public static Person ItToT(IPerson iperson)
+        public static Person? ItToT(IPerson iperson, DbContext context)
         {
-            if (iperson is not Person person)
-            {
-                person = new()
-                {
-                    Id = iperson.Id,
-                    Name = iperson.Name
-                };
-            }
+            var person = context.CreateProxy<Person>();
+            person.Name = iperson.Name;
             return person;
         }
 
@@ -61,13 +52,11 @@ namespace DataBase
             return person;
         }
 
-        public static User ItToT(IUser iuser)
+        public static User ItToT(IUser iuser, DbContext context)
         {
-            User user = new()
-            {
-                IsAuthorized = iuser.IsAuthorized,
-                Name = iuser.Name
-            };
+            var user = context.CreateProxy<User>();
+            user.IsAuthorized = iuser.IsAuthorized;
+            user.Name = iuser.Name;
             return user;
         }
 

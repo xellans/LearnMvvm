@@ -13,4 +13,5 @@
     <sys:String x:Key="Lang11">Удалить</sys:String>
     <sys:String x:Key="Lang12">Тёмная тема</sys:String>
     <sys:String x:Key="Lang13">Светлая тема</sys:String>
+    <sys:String x:Key="Lang14">Случайные данные</sys:String>
 </ResourceDictionary>

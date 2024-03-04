@@ -11,14 +11,12 @@ using WpfCore;
 
 namespace ViewModel
 {
-    public class SettingVM :ViewModelBase, ISettingVM
+    public class SettingVM : ViewModelBase, ISettingVM
     {
         #region Выбор темы
-        private ICommand _DarkTheme;
-        public ICommand DarkTheme => _DarkTheme ?? new RelayCommand(Set);
+        public ICommand DarkTheme => GetCommand<object>(Set);
 
-        private ICommand _LightTheme;
-        public ICommand LightTheme => _LightTheme ?? new RelayCommand(Set);
+        public ICommand LightTheme => GetCommand<object>(Set);
         #endregion
 
         #region Выбор языка

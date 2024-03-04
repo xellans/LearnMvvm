@@ -35,6 +35,7 @@ namespace LearnMvvm
             if (nameof(PersonVM).Equals(obj))
             {
                 IPersonModel model = new PersonModel(ContextRepositories.Person());
+                if(PersonVM == null)
                 PersonVM = new PersonVM(model);
                 obj = PersonVM;
             }
@@ -42,13 +43,15 @@ namespace LearnMvvm
             if (nameof(ProductVM).Equals(obj))
             {
                 IProductModel model = new ProductModel(ContextRepositories.Products());
-                ProductVM = new ProductVM(model);
+                if (ProductVM == null)
+                    ProductVM = new ProductVM(model);
                 obj = ProductVM;
             }
 
             if (nameof(SettingVM).Equals(obj))
             {
-                SettingVM = new SettingVM();
+                if (SettingVM == null)
+                    SettingVM = new SettingVM();
                 obj = SettingVM;
             }
 

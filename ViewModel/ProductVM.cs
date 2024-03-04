@@ -2,6 +2,10 @@
 using WpfCore;
 using Common.Standard.Interfaces.Model;
 using Common.Standard.Interfaces.ViewModel;
+using System.Windows.Data;
+using System.Globalization;
+using System.ComponentModel;
+using System.Windows.Controls.Primitives;
 
 namespace ViewModel
 {
@@ -11,8 +15,10 @@ namespace ViewModel
         {
             this.Repository = Repository;
             ProductDataList = Repository.ProductCollections;
-            Selected = Repository.Product.NewT();
+            if(ProductDataList.Count() > 0)
+            Selected = ProductDataList[0];
         }
+
         public IReadOnlyObservableCollection<IProduct> ProductDataList { get => Get<IReadOnlyObservableCollection<IProduct>>(); set => Set(value); }
 
 
@@ -21,8 +27,7 @@ namespace ViewModel
         public IProduct Selected { get => Get<IProduct>(); set => Set(value); }
         #region Сохранение изменений
 
-        private ICommand _SaveEdit;
-        public ICommand SaveEdit => _SaveEdit ??  new RelayCommand(SaveEditExcute);
+        public ICommand SaveEdit => GetCommand(SaveEditExcute);
         private void SaveEditExcute()
         {
             if (Selected != null)
@@ -32,8 +37,7 @@ namespace ViewModel
 
         #region Удаление записей
 
-        private ICommand _Delete;
-        public ICommand Delete => _Delete ?? new RelayCommand(_DeleteExcute);
+        public ICommand Delete => GetCommand(_DeleteExcute);
         private void _DeleteExcute()
         {
             if (Selected != null)
@@ -51,12 +55,28 @@ namespace ViewModel
 
         #region Добавление новых записей
 
-        private ICommand _Add;
-        public ICommand Add => _Add ?? new RelayCommand(AddExcute);
+        public ICommand Add => GetCommand(AddExcute);
         private void AddExcute()
         {
             if (Selected != null)
                 Repository.Product.Add(Selected);
+
+        }
+        #endregion
+
+
+
+        #region Заполнение Selected случаныйыми данными из коллекции
+
+        public ICommand RandomData => GetCommand(RandomDataExcute);
+        private void RandomDataExcute()
+        {
+            if (Selected != null)
+            {
+                Selected.Name = ProductDataList[Random.Shared.Next(ProductDataList.Count())].Name;
+                Selected.Description = ProductDataList[Random.Shared.Next(ProductDataList.Count())].Description;
+            }
+
         }
         #endregion
     }
