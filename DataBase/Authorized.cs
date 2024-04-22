@@ -16,9 +16,8 @@ namespace Repositories
     {
         public Authorized(Context context) 
         {
-            //Context = new();
             this.context = context;
-            //this.context.Database.EnsureCreated();
+            this.context.Database.EnsureCreated();
             User? old = this.context.User.FirstOrDefault();
             if (old != null)
                 IsAuthorized = old.IsAuthorized;

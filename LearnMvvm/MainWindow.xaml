@@ -39,9 +39,9 @@
                     </Grid.RowDefinitions>
                     <TextBlock FontSize="26" FontFamily="Yu Gothic" Foreground="#6880AA" Margin="10 0 0 0" FontStyle="Italic">Exemple project</TextBlock>
                     <StackPanel Grid.Row="1">
-                        <RadioButton Command="{x:Static local:App.SetCurrentContext}" CommandParameter="PersonVM" Content="{DynamicResource Lang1}"></RadioButton>
-                        <RadioButton Command="{x:Static local:App.SetCurrentContext}" CommandParameter="ProductVM" Content="{DynamicResource Lang2}"></RadioButton>
-                        <RadioButton Command="{x:Static local:App.SetCurrentContext}" CommandParameter="SettingVM" Content="{DynamicResource Lang3}"></RadioButton>
+                        <RadioButton Command="{local:SetCurrentContext}" CommandParameter="PersonVM" Content="{DynamicResource Lang1}"></RadioButton>
+                        <RadioButton Command="{local:SetCurrentContext}" CommandParameter="ProductVM" Content="{DynamicResource Lang2}"></RadioButton>
+                        <RadioButton Command="{local:SetCurrentContext}" CommandParameter="SettingVM" Content="{DynamicResource Lang3}"></RadioButton>
                     </StackPanel>
                 </Grid>
             </Border>
