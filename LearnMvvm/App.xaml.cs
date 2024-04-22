@@ -11,13 +11,19 @@ namespace LearnMvvm
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+
+
             NavigatorLocator locator = (NavigatorLocator)this.FindResource("locator");
             Context context = new Context();
             ContextRepositories contextRepositories = new ContextRepositories(context);
+
+
             InstancesProvider.Register<IAuthVM>(() => new AuthVM(new Authorized(context)));
             InstancesProvider.Register<IProductVM>(() => new ProductVM(new ProductModel(contextRepositories.Products())));
             InstancesProvider.Register<IPersonVM>(() => new PersonVM(new PersonModel(contextRepositories.Person())));
             InstancesProvider.Register<ISettingVM>(() => new SettingVM());
+
         }
     }
 }
